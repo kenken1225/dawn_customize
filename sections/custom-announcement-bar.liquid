@@ -1,0 +1,137 @@
+<!-- assignは変数　countを０と定義する。 X=4 みたいな感じ -->
+{% assign count = 0 %}
+
+{% for block in section.blocks %}
+  {% case block.type %}
+  <!-- Blockのtypeを表示 -->
+  {% when 'annoucement' %}
+    <div class="custom-announcement-bar-{{ count }}">
+      <!-- もし、全てのテンプレートファイルの中で、indexファイル（ホームページ）もしくは、Schemaがfalseだったら
+      アナウンスバーを表示。他のページは出してない-->
+      {% if template.name == 'index' or block.settings.show_announcement_bar == false %}
+        <a href="{{ block.settings.link }}" class="custom-announcement-bar__link">
+          <p class="custom-announcement-bar__message">{{ block.settings.annoucement_bar_text }}</p>
+        </a>
+      {% endif %}
+    </div>
+
+    <style>
+      .custom-announcement-bar-{{ count }}{
+        text-align: center;
+      }
+
+      .custom-announcement-bar__link{
+        text-decoration: none;
+      }
+
+      .custom-announcement-bar-{{ count }} .custom-announcement-bar__message{
+        {% if block.settings.bold-text %}
+        font-weight : bold;
+      {% endif %}
+      font-size: {{ block.settings.font-size }}px;
+      padding: {{ block.settings.height }}px 0;
+      background-color: {{ block.settings.background-color }};
+      margin: 0px;
+      color: {{ block.settings.font-color }};
+      text-transform: {{ block.settings.text-transform }};
+      }
+    </style>
+
+    {% assign count = count | plus:1 %}
+
+  {% endcase %}
+  {% endfor %}
+
+  {% schema %}
+  {
+    "name": "告知バー（カスタム）",
+    "max_blocks": 4,
+    "blocks" : [
+      {
+        "type": "annoucement",
+        "name": "告知バー",
+        "settings" : [
+          {
+            "type": "checkbox",
+            "id": "show_announcement_bar",
+            "label": "告知バーを表示",
+            "default": false
+          },
+          {
+            "type" : "text",
+            "id" : "annoucement_bar_text",
+            "default": "告知バー",
+            "label" : "テキスト"
+          },
+          {
+            "type": "select",
+            "id": "text-transform",
+            "label": "大文字/小文字変換",
+            "options": [
+              {
+                "value": "normal",
+                "label": "Don't transform"
+              },
+              {
+                "value": "lowercase",
+                "label": "Lowercase"
+              },
+              {
+                "value": "uppercase",
+                "label": "Uppercase"
+              },
+              {
+                "value": "capitalize",
+                "label": "Capitalize first letters"
+              }
+            ],
+            "default": "normal"
+          },
+          {
+            "type": "checkbox",
+            "id": "bold-text",
+            "default": false,
+            "label": "太文字"
+          },
+          {
+            "type": "range",
+            "id": "font-size",
+            "default": 14,
+            "label": "文字の大きさ",
+            "min": 12,
+            "max": 20,
+            "step": 1,
+            "unit": "px"
+          },
+          {
+            "type": "range",
+            "id": "height",
+            "default": 6,
+            "label": "文字幅",
+            "min": 0,
+            "max": 20,
+            "step": 2,
+            "unit": "px"
+          },
+          {
+          "type": "color",
+          "id": "background-color",
+          "label": "背景色",
+          "default": "#ffffff"
+          },
+          {
+            "type": "color",
+            "id": "font-color",
+            "label": "文字色",
+            "default": "#000000"
+          },
+          {
+          "type": "url",
+          "id": "link",
+          "label": "URL"
+          }
+        ]
+      }
+    ]
+  }
+  {% endschema %}
