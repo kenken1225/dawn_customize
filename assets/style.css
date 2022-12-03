@@ -630,7 +630,7 @@ header {
   position: relative;
   z-index: 1;
   /*↑z-indexの値をh1のz-indexの値よりも小さくして背景に回す*/
-  height: 100vh;
+  /* height: 100vh; */
   /*スライダー全体の縦幅を画面の高さいっぱい（100vh）にする*/
 }
 
@@ -672,11 +672,11 @@ header {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 70%;
-  height: 30vh;
+  /* width: 70%; */
+  /* height: 30vh; */
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  padding: 40px;
+  /* padding: 40px; */
 }
 
 .slider-item .copy_area p,
@@ -695,7 +695,7 @@ header {
   margin-top: 15px;
 }
 
-.slider-item01 {
+/* .slider-item01 {
   background-image: url(../img/new/fv-1.jpeg);
 }
 
@@ -709,7 +709,7 @@ header {
 
 .slider-item04 {
   background-image: url(../img/new/fv-4.jpeg);
-}
+} */
 
 /*矢印の設定*/
 .slick-prev,

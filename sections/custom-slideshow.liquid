@@ -1,0 +1,65 @@
+
+<section class="slider">
+    <ul class="slider-wrap">
+      {% for block in section.blocks %}
+        {% case block.type %} <!-- 呼び出したいもの case 〇〇に入れる -->
+          {% when 'slide' %}
+            <li class="slide slider-item">
+              <div class="copy_area">
+                {{ block.settings.image | image_url: width: 1450 | image_tag }}
+              </div>
+            </li>
+        {% endcase %}
+      {% endfor %}
+      {% comment %} <li class="slider-item01 slider-item">
+      </li>
+      <li class="slider-item02 slider-item">
+        <div class="copy_area">
+        </div>
+      </li>
+      <li class="slider-item03 slider-item">
+        <div class="copy_area">
+        </div>
+      </li>
+      <li class="slider-item04 slider-item">
+        <div class="copy_area">
+        </div>
+      </li> {% endcomment %}
+    </ul>
+
+</section>
+
+
+<style>
+
+
+
+</style>
+
+
+{% schema %}
+  {
+    "name": "スライドショー",
+    "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "スライドショー"
+    }
+    ],
+    "max_blocks": 5,
+    "blocks": [
+      {
+      "name": "画像",
+       "type": "slide",
+       "settings": [
+         {
+           "type": "image_picker",
+           "id": "image",
+           "label": "Image"
+         }
+       ]
+      }
+    ]
+  }
+{% endschema %}

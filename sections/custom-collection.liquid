@@ -1,0 +1,85 @@
+
+<section class="2022_new_collection sec">
+    <h2>2022 NEW COLLECTION "APPLAUSE"</h2>
+    <div class="collection-wrap flex">
+        <!-- コレクションの中の商品を取ってくるために、変数を作る -->
+        {% assign collection = collections[section.settings.toppage_collection] %}
+        {% for product in collection.products %}
+            <a href="{{ product.url }}" class="product_card">
+                <!-- product.featured_imageは、商品のアイキャッチ画像を返してくれる. srcは、商品の情報を返してくれる（あってもなくてもいいかも）-->
+                <img src="{{ product.featured_image.src | asset_img_url: '3000x' }}" alt="">
+                <h3> {{ product.title }} </h3>
+                <p class="price"> {{ product.price }} </p>
+                <p class="Btn bgleft"><span>詳細を見る</span></p>
+              </a>
+        {% endfor %}
+
+        <a href="#" class="product_card">
+            <img src="img/new/product-2.webp" alt="">
+            <h3>商品3</h3>
+            <p class="price">¥2,592</p>
+            <p class="Btn bgleft"><span>詳細を見る</span></p>
+          </a>
+          <a href="#" class="product_card">
+            <img src="img/new/product-2.webp" alt="">
+            <h3>商品3</h3>
+            <p class="price">¥2,592</p>
+            <p class="Btn bgleft"><span>詳細を見る</span></p>
+          </a>
+          <a href="#" class="product_card">
+            <img src="img/new/product-2.webp" alt="">
+            <h3>商品3</h3>
+            <p class="price">¥2,592</p>
+            <p class="Btn bgleft"><span>詳細を見る</span></p>
+          </a>
+          <a href="#" class="product_card">
+            <img src="img/new/product-2.webp" alt="">
+            <h3>商品3</h3>
+            <p class="price">¥2,592</p>
+            <p class="Btn bgleft"><span>詳細を見る</span></p>
+          </a>
+
+      {% comment %} <a href="#" class="product_card">
+        <img src="img/new/product-2.webp" alt="">
+        <h3>商品3</h3>
+        <p class="price">¥2,592</p>
+        <p class="Btn bgleft"><span>詳細を見る</span></p>
+      </a>
+      <a href="#" class="product_card">
+        <img src="img/new/product-2.webp" alt="">
+        <h3>商品3</h3>
+        <p class="price">¥2,592</p>
+        <p class="Btn bgleft"><span>詳細を見る</span></p>
+      </a>
+      <a href="#" class="product_card">
+        <img src="img/new/product-2.webp" alt="">
+        <h3>商品3</h3>
+        <p class="price">¥2,592</p>
+        <p class="Btn bgleft"><span>詳細を見る</span></p>
+      </a>
+      <a href="#" class="product_card">
+        <img src="img/new/product-2.webp" alt="">
+        <h3>商品3</h3>
+        <p class="price">¥2,592</p>
+        <p class="Btn bgleft"><span>詳細を見る</span></p>
+      </a> {% endcomment %}
+
+    </div>
+
+    <a href="#" class="Btn02 bgleft02"><span>もっと見る</span></a>
+
+  </section>
+
+
+  {% schema %}
+    {
+        "name": "トップページコレクション",
+        "settings":[
+            {
+                "type": "collection",
+                "id": "toppage_collection",
+                "label": "トップページコレクション"
+            }
+        ]
+    }
+  {% endschema %}
