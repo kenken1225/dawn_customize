@@ -17,21 +17,31 @@
         <!-- form＝データ送信、 method=情報の送り方（postで中身の情報を送る）action=データの送信先 enctype="multipart/form-data"は、ファイル名の情報を送信する  -->
         <form method="post" action="/cart/add" enctype="multipart/form-data" > <!-- /car/add はshopifyがデフォルトで商品を追加するコードになってる -->
             <div class="qtydiv counter">
-                <div class="qtvbox">
-                    <span class="btnqtv qtvminus icon icon-minus" ><i class="fas fa-minus"></i></span>
+                <div class="qtybox">
+                    <span class="btnqty qtyminus icon icon-minus" ><i class="fas fa-minus"></i></span>
                     <!-- inputタグは、いろんな種類の入力欄を作るためのタグ。typeで種類を選ぶ -->
                     <span><input type="text" id="quantity" name="quantity" value="1" min="1" class="quantity-selector quantity-input" readonly="" ></span>
-                    <span class="btnqtv qtvminus icon icon-plus" ><i class="fas fa-plus"></i></span>
+                    <span class="btnqty qtyplus icon icon-plus" ><i class="fas fa-plus"></i></span>
                 </div>
             </div>
-
-            <button href="#" class="Btn02 bgleft02">
+            <!--  {{ product.variants.first.id }}は、一つ一つの商品のIDを呼び出したいから、first.idを記述 -->
+            <input type="hidden" name="id" value={{ product.variants.first.id }}>
+            <!--  product.selected_or_first_available_variantで、 -->
+            {% assign current_variant = product.selected_or_first_available_variant %}
+            <!-- variant.inventory_quantityは、バリアントの在庫数を返す -->
+            {% if current_variant.inventory_quantity > 0 %}
+              <button href="#" class="Btn02 bgleft02">
                 <span>カートに追加する</span>
-            </button>
-            
-            <a href="{{ product.url }} " class="link__detail">詳細を見る</a>
+              </button>
+              <!-- 現在の残り在庫数が10個以下なら -->
+              {% if current_variant.inventory_quantity < 10 %}
+                <span style="color: red;" > 残り在庫は{{ current_variant.inventory_quantity }}個です </span>
+            {% else %}
+              <div class="Btn02"><span>在庫なし</span></div>
+            {% endif %}
             </div>
          </form>
+         <a href="{{ product.url }} " class="link__detail">詳細を見る</a>
 
       {% comment %} <img src="img/new/product-3.webp" alt="" class="img">
       <div class="product__detail">

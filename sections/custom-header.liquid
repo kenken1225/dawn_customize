@@ -91,7 +91,9 @@
     </a> {% endcomment %}
     <ul class="icon-wrap">
       <li><a href="/cart" id="openbtn" class="openbtn"><i class="fas fa-shopping-cart"></i></a></li>
-      <span>1</span>
+      {% if {{ cart.item_count }} > 0 %}
+        <span> {{ cart.item_count }} </span>
+      {% endif %}
     </ul>
     <div class="black_bg" id="js-black-bg"></div>
     <!--カートのサイドバー-->

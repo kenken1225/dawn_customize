@@ -991,6 +991,11 @@ header {
   width: 1.5em;
 }
 
+.btnqty {
+  cursor: pointer;
+}
+
+
 .sec03 .popular_product .product__detail .Btn02 {
   width: 100%;
 }
@@ -1141,11 +1146,11 @@ header {
   -ms-flex-positive: 1;
   flex-grow: 1;
   position: relative;
-  background-image: url(../img/new/product-1.webp);
+  /* background-image: url(../img/new/product-1.webp); */
   background-position: center;
 }
 
-.sec04 .items-wrapper .item:nth-child(2) {
+/* .sec04 .items-wrapper .item:nth-child(2) {
   background-image: url(../img/new/product-2.webp);
 }
 
@@ -1159,7 +1164,7 @@ header {
 
 .sec04 .items-wrapper .item:nth-child(5) {
   background-image: url(../img/new/product-5.webp);
-}
+} */
 
 @media (max-width: 768px) {
   .sec04 .items-wrapper .item {
