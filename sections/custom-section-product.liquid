@@ -13,16 +13,25 @@
         <div class="product__detail__text">
           <p> {{ product.content }} </p>
         </div>
-        <div class="counter">
-          <span><i class="fas fa-minus"></i></span>
-          <span>1</span>
-          <span><i class="fas fa-plus"></i></span>
-        </div>
-        <button href="#" class="Btn02 bgleft02">
-          <span>カートに追加する</span>
-        </button>
-        <a href="/product.html" class="link__detail">詳細を見る</a>
-      </div>
+
+        <!-- form＝データ送信、 method=情報の送り方（postで中身の情報を送る）action=データの送信先 enctype="multipart/form-data"は、ファイル名の情報を送信する  -->
+        <form method="post" action="/cart/add" enctype="multipart/form-data" > <!-- /car/add はshopifyがデフォルトで商品を追加するコードになってる -->
+            <div class="qtydiv counter">
+                <div class="qtvbox">
+                    <span class="btnqtv qtvminus icon icon-minus" ><i class="fas fa-minus"></i></span>
+                    <!-- inputタグは、いろんな種類の入力欄を作るためのタグ。typeで種類を選ぶ -->
+                    <span><input type="text" id="quantity" name="quantity" value="1" min="1" class="quantity-selector quantity-input" readonly="" ></span>
+                    <span class="btnqtv qtvminus icon icon-plus" ><i class="fas fa-plus"></i></span>
+                </div>
+            </div>
+
+            <button href="#" class="Btn02 bgleft02">
+                <span>カートに追加する</span>
+            </button>
+            
+            <a href="{{ product.url }} " class="link__detail">詳細を見る</a>
+            </div>
+         </form>
 
       {% comment %} <img src="img/new/product-3.webp" alt="" class="img">
       <div class="product__detail">
@@ -108,11 +117,6 @@
                 "unit": "px",
                 "label": "文字の大きさ",
                 "default": 18
-            },
-            {
-                "type": "collection",
-                "id": "toppage_collection",
-                "label": "トップページコレクション"
             }
         ]
     }

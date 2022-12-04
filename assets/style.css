@@ -987,6 +987,10 @@ header {
   padding: 10px 20px;
 }
 
+.counter input {
+  width: 1.5em;
+}
+
 .sec03 .popular_product .product__detail .Btn02 {
   width: 100%;
 }
@@ -1012,7 +1016,7 @@ header {
   border: none;
   padding: 8px;
   text-align: center;
-  width: 50px;
+  width: 30px;
   outline: none;
   display: inline-block;
 }
