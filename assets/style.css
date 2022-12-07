@@ -920,9 +920,11 @@ header {
   }
 }
 
+
 .sec03 {
   border-bottom: none;
 }
+
 
 .sec03 .popular_product {
   text-align-last: left;
@@ -1123,6 +1125,11 @@ header {
   }
 }
 
+
+.slideItemImage .slick-track{
+  width: 100%!important;
+}
+
 .sec04 {
   border-bottom: none;
 }
@@ -1180,10 +1187,10 @@ header {
   transform: translate(-50%, -50%);
 }
 
-.sec04 .items-wrapper .item__content h3 {
+/* .sec04 .items-wrapper .item__content h3 {
   font-size: 23px;
   font-weight: bold;
-}
+} */
 
 .sec04 .items-wrapper .item__content .Btn-wrapper {
   background: #000;
