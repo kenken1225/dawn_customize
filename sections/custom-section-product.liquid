@@ -5,7 +5,7 @@
         <!-- コレクションの中の商品を取ってくるために、変数を作る -->
         {% assign product = all_products[section.settings.toppage_product] %}
         <img src="{{ product.featured_image.src | img_url: '3000x' }}" alt="" class="img">
-      <div class="product__detail">
+          <div class="product__detail">
         <div class="product__detail__main">
           <h2><span> {{ produc.title }} </span></h2>
           <p class="price"> {{ product.price | money }} </p>
@@ -25,7 +25,7 @@
                 </div>
             </div>
             <!--  {{ product.variants.first.id }}は、一つ一つの商品のIDを呼び出したいから、first.idを記述 -->
-            <input type="hidden" name="id" value={{ product.variants.first.id }}>
+            <input type="hidden" name="id" value= {{ product.variants.first.id }}>
             <!--  product.selected_or_first_available_variantで、 -->
             {% assign current_variant = product.selected_or_first_available_variant %}
             <!-- variant.inventory_quantityは、バリアントの在庫数を返す -->
@@ -34,9 +34,10 @@
                 <span>カートに追加する</span>
               </button>
               <!-- 現在の残り在庫数が10個以下なら -->
-              {% if current_variant.inventory_quantity < 10 %}
+            {% if current_variant.inventory_quantity < 10 %}
                 <span style="color: red;" > 残り在庫は{{ current_variant.inventory_quantity }}個です </span>
-            {% else %}
+            {% endif %}
+                {% else %}
               <div class="Btn02"><span>在庫なし</span></div>
             {% endif %}
             </div>
@@ -97,37 +98,37 @@
   </style>
 
 
-  {% schema %}
-    {
-        "name": "トップページの商品",
-        "settings":[
-            {
-                "type": "product",
-                "id": "toppage_product",
-                "label": "商品を選択する"
-            },
-            {
-                "type": "text",
-                "id": "toppage_text",
-                "default": "土曜限定販売の大人気商品",
-                "label": "タイトル"
-            },
-            {
-                "type": "checkbox",
-                "id": "bold-text",
-                "default": false,
-                "label": "太文字"
-            },
-            {
-                "type": "range",
-                "id": "toppage_font_size",
-                "min": 16,
-                "max": 40,
-                "step": 2,
-                "unit": "px",
-                "label": "文字の大きさ",
-                "default": 18
-            }
-        ]
-    }
-  {% endschema %}
+{% schema %}
+{
+     "name": "トップページの商品",
+     "settings": [
+      {
+          "type": "product",
+          "id": "toppage_product",
+          "label": "商品を選択する"
+      },
+      {
+          "type": "text",
+          "id": "toppage_text",
+          "default": "土曜限定販売の大人気商品",
+          "label": "タイトル"
+      },
+      {
+          "type": "checkbox",
+          "id": "bold-text",
+          "default": false,
+          "label": "太文字"
+      },
+      {
+          "type": "range",
+          "id": "toppage_font_size",
+          "min": 16,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "label": "文字の大きさ",
+          "default": 18
+      }
+    ]
+}
+{% endschema %}
