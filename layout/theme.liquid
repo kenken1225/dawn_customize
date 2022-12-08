@@ -242,6 +242,14 @@
     </script>
   </head>
 
+  <!--
+
+
+    以下、修正！
+
+
+  -->
+
   <body class="gradient">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ "accessibility.skip_to_text" | t }}
@@ -252,7 +260,7 @@
     {%- endif -%}
 
     {% section 'custom-announcement-bar' %}
-   {% section 'custom-header' %}
+   {% comment %} {% section 'custom-header' %} {% endcomment %}
     {% comment %} {% section 'announcement-bar' %} {% endcomment %}
     {% comment %} {% section 'header' %} {% endcomment %}
 
@@ -306,16 +314,5 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     {{ 'script.js' | asset_url | script_tag }}
-
-    {% if template contains 'product' %}
-
-      {{ '//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js' | script_tag }}
-      {{ 'jquery.products.min.js' | asset_url | script_tag }}
-
-      <script>
-      Shopify.Products.recordRecentlyViewed();
-      </script>
-
-      {% endif %}
   </body>
 </html>

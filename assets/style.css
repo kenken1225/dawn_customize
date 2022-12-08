@@ -201,8 +201,8 @@ header {
 }
 
 .header .icon-wrap span {
-  width: 15px;
-  height: 15px;
+  width: 22px;
+  height: 22px;
   background: #B1BDC5;
   border-radius: 50%;
   content: "";
@@ -213,8 +213,8 @@ header {
   z-index: 10000;
   transform: translate(-50%, -50%);
   line-height: 15px;
-  top: -10%;
-  left: -50%;
+  top: 12%;
+  left: 0%;
 }
 
 .header .icon-wrap li {
@@ -1126,8 +1126,8 @@ header {
 }
 
 
-.slideItemImage .slick-track{
-  width: 100%!important;
+.slideItemImage .slick-track {
+  width: 100% !important;
 }
 
 .sec04 {
