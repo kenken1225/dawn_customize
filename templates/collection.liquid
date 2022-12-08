@@ -1,0 +1,152 @@
+
+  <main class="collection">
+
+    <section class="2022_new_collection sec">
+      <h2>VALENTINE GIFT</h2>
+
+
+      {% comment %} <div class="collections__wrap flex">
+        <div class="category__choice-wrap">
+          <div class="category__choice">
+            <p class="headline">フィルター</p>
+            <ul class="categories">
+              <li><a href="#">カテゴリメニュー</a></li>
+              <li><a href="#">カテゴリメニュー</a></li>
+              <li><a href="#">カテゴリメニュー</a></li>
+              <li><a href="#">カテゴリメニュー</a></li>
+            </ul>
+          </div>
+        </div> {% endcomment %}
+
+
+        <div class="collection-wrap flex">
+          {% paginate collection.products by 8 %}
+            {% for product in collection.products %}
+              <!-- within | collection を追加することで、コレクション内の製品のプロダクトを出力してくれる -->
+            <a href=" product.url | within: collection  " class="product_card">
+              <img src=" {{ product.featured_image.src | img_url: 'large' }} " alt="">
+              <h3> {{ product.title }} </h3>
+              <p class="price"> {{ product.price | money }} </p>
+              <p class="Btn bgleft"><span>詳細を見る</span></p>
+            </a>
+            {% else %}
+            <p>お探しの商品が見つかりませんでした。</p>
+            {% endfor %}
+        </div>
+
+        <!-- 次のページの案内 -->
+          {% if paginate.pages > 1 %}
+            <nav aria-label="Page navigation example" class="paginte_nav"  >
+              {{ paginate | default_pagination: next: '»', previous: '«' }}
+            </nav>
+          {% endif %}
+          {% endpaginate %}
+
+
+          {% comment %} <a href="#" class="product_card">
+            <img src="img/new/product-3.webp" alt="">
+            <h3>商品３</h3>
+            <p class="price">¥2,592</p>
+            <p class="Btn bgleft"><span>詳細を見る</span></p>
+          </a>
+          <a href="#" class="product_card">
+            <img src="img/new/product-3.webp" alt="">
+            <h3>商品３</h3>
+            <p class="price">¥2,592</p>
+            <p class="Btn bgleft"><span>詳細を見る</span></p>
+          </a>
+          <a href="#" class="product_card">
+            <img src="img/new/product-3.webp" alt="">
+            <h3>商品３</h3>
+            <p class="price">¥2,592</p>
+            <p class="Btn bgleft"><span>詳細を見る</span></p>
+          </a>
+          <a href="#" class="product_card">
+            <img src="img/new/product-3.webp" alt="">
+            <h3>商品３</h3>
+            <p class="price">¥2,592</p>
+            <p class="Btn bgleft"><span>詳細を見る</span></p>
+          </a>
+          <a href="#" class="product_card">
+            <img src="img/new/product-3.webp" alt="">
+            <h3>商品３</h3>
+            <p class="price">¥2,592</p>
+            <p class="Btn bgleft"><span>詳細を見る</span></p>
+          </a>
+          <a href="#" class="product_card">
+            <img src="img/new/product-3.webp" alt="">
+            <h3>商品３</h3>
+            <p class="price">¥2,592</p>
+            <p class="Btn bgleft"><span>詳細を見る</span></p>
+          </a>
+          <a href="#" class="product_card">
+            <img src="img/new/product-3.webp" alt="">
+            <h3>商品３</h3>
+            <p class="price">¥2,592</p>
+            <p class="Btn bgleft"><span>詳細を見る</span></p>
+          </a>
+          <a href="#" class="product_card">
+            <img src="img/new/product-3.webp" alt="">
+            <h3>商品３</h3>
+            <p class="price">¥2,592</p>
+            <p class="Btn bgleft"><span>詳細を見る</span></p>
+          </a>
+          <a href="#" class="product_card">
+            <img src="img/new/product-3.webp" alt="">
+            <h3>商品３</h3>
+            <p class="price">¥2,592</p>
+            <p class="Btn bgleft"><span>詳細を見る</span></p>
+          </a> {% endcomment %}
+
+          <div class="product_card"></div>
+
+      </div>
+    
+    </section>
+
+    {% comment %} <section class="recommend sec">
+      <h2>最近見た商品</h2>
+      <div class="collection-wrap flex">
+        <a href="#" class="product_card">
+          <img src="img/new/product-3.webp" alt="">
+          <h3>商品３</h3>
+          <p class="price">¥2,592</p>
+          <p class="Btn bgleft"><span>詳細を見る</span></p>
+        </a>
+        <a href="#" class="product_card">
+          <img src="img/new/product-3.webp" alt="">
+          <h3>商品３</h3>
+          <p class="price">¥2,592</p>
+          <p class="Btn bgleft"><span>詳細を見る</span></p>
+        </a>
+      </div>
+    </section>
+  </main> {% endcomment %}
+
+
+
+
+  <style>
+  .paginte_nav{
+  display: flex;
+  justify-content: center;
+  }
+
+  .paginte_nav span{
+    padding: 10px;
+    margin: 7px;
+    font-size: 25px;
+    border: #E0E0E0 2px solid;
+  }
+
+  @media screen and (max-width: 480px) {
+    .paginte_nav span{
+      font-size: 15px;
+    }
+  }
+
+  {% comment %} .page{
+   border: #000 1px solid;
+  } {% endcomment %}
+
+  </style>
