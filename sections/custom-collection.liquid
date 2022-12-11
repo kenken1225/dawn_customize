@@ -1,23 +1,29 @@
+<section
+  class="2022_new_collection sec"
+  data-aos="fade-up"
+  data-aos-duration="2000"
+>
+  <div class="toppage_text">{{ section.settings.toppage_text }}</div>
+  <div class="collection-wrap flex">
+    <!-- コレクションの中の商品を取ってくるために、変数を作る -->
+    {% assign collection = collections[section.settings.toppage_collection] %}
+    <!-- paginateは、for文の表示個数を制限してくれる（ここでは３つの商品） -->
+    {% paginate collection.products by 4 %}
+      {% for product in collection.products %}
+        <a href="{{ product.url }}" class="product_card">
+          <!--
+            product.featured_imageは、商品のアイキャッチ画像を返してくれる. srcは、商品の情報を返してくれる（あってもなくてもいいかも）
+          -->
+          <img src="{{ product.featured_image.src | img_url: '3000x' }}" alt="">
+          <h3>{{ product.title }}</h3>
+          <p class="price">{{ product.price | money }}</p>
+          <p class="Btn bgleft"><span>詳細を見る</span></p>
+        </a>
+      {% endfor %}
+    {% endpaginate %}
 
-<section class="2022_new_collection sec">
-    <div class="toppage_text" > {{ section.settings.toppage_text }}</div>
-    <div class="collection-wrap flex">
-        <!-- コレクションの中の商品を取ってくるために、変数を作る -->
-        {% assign collection = collections[section.settings.toppage_collection] %}
-        <!-- paginateは、for文の表示個数を制限してくれる（ここでは３つの商品） -->
-        {% paginate collection.products by 4 %}
-            {% for product in collection.products %}
-                <a href="{{ product.url }}" class="product_card">
-                    <!-- product.featured_imageは、商品のアイキャッチ画像を返してくれる. srcは、商品の情報を返してくれる（あってもなくてもいいかも）-->
-                    <img src="{{ product.featured_image.src | img_url: '3000x' }}" alt="">
-                    <h3> {{ product.title }} </h3>
-                    <p class="price"> {{ product.price | money}} </p>
-                    <p class="Btn bgleft"><span>詳細を見る</span></p>
-                </a>
-            {% endfor %}
-        {% endpaginate %}
-
-      {% comment %} <a href="#" class="product_card">
+    {% comment %}
+       <a href="#" class="product_card">
         <img src="img/new/product-2.webp" alt="">
         <h3>商品3</h3>
         <p class="price">¥2,592</p>
@@ -40,66 +46,62 @@
         <h3>商品3</h3>
         <p class="price">¥2,592</p>
         <p class="Btn bgleft"><span>詳細を見る</span></p>
-      </a> {% endcomment %}
+      </a>
+    {% endcomment %}
+  </div>
 
-    </div>
+  <a href=" {{ collection.url }} " class="Btn02 bgleft02"><span>もっと見る</span></a>
+</section>
 
-    <a href=" {{ collection.url }} " class="Btn02 bgleft02"><span>もっと見る</span></a>
+<style>
+  .toppage_text{
+      {% if section.settings.bold-text %}
+          font-weight : bold;
+      {% endif %}
+      font-size: {{ section.settings.toppage_font_size }}px;
+      text-align: center;
+      margin-bottom: 20px;
+  }
+  @media screen and (max-width:480px){
+      .toppage_text{
+          font-size: 20px;
+          margin: 0 auto 0;
+          padding: 20px;
+      }
+  }
+</style>
 
-  </section>
-
-  <style>
-    .toppage_text{
-        {% if section.settings.bold-text %}
-            font-weight : bold;
-        {% endif %}
-        font-size: {{ section.settings.toppage_font_size }}px;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-    @media screen and (max-width:480px){
-        .toppage_text{
-            font-size: 20px;
-            margin: 0 auto 0;
-            padding: 20px;
-        }
-    }
-
-
-  </style>
-
-
-  {% schema %}
+{% schema %}
+{
+  "name": "トップページコレクション",
+  "settings": [
     {
-        "name": "トップページコレクション",
-        "settings":[
-            {
-                "type": "text",
-                "id": "toppage_text",
-                "default": "2022 NEW COLLECTION ",
-                "label": "タイトル"
-            },
-            {
-                "type": "checkbox",
-                "id": "bold-text",
-                "default": false,
-                "label": "太文字"
-            },
-            {
-                "type": "range",
-                "id": "toppage_font_size",
-                "min": 16,
-                "max": 40,
-                "step": 2,
-                "unit": "px",
-                "label": "文字の大きさ",
-                "default": 18
-            },
-            {
-                "type": "collection",
-                "id": "toppage_collection",
-                "label": "トップページコレクション"
-            }
-        ]
+      "type": "text",
+      "id": "toppage_text",
+      "default": "2022 NEW COLLECTION ",
+      "label": "タイトル"
+    },
+    {
+      "type": "checkbox",
+      "id": "bold-text",
+      "default": false,
+      "label": "太文字"
+    },
+    {
+      "type": "range",
+      "id": "toppage_font_size",
+      "min": 16,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "文字の大きさ",
+      "default": 18
+    },
+    {
+      "type": "collection",
+      "id": "toppage_collection",
+      "label": "トップページコレクション"
     }
-  {% endschema %}
+  ]
+}
+{% endschema %}

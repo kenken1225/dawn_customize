@@ -1,5 +1,6 @@
 
-<section class="sec sec03">
+<section class="sec sec03" data-aos="fade-up"
+  data-aos-duration="2000">
     <div class="toppage_text">{{ section.settings.toppage_text }}</div>
     <div class="popular_product flex">
         <!-- コレクションの中の商品を取ってくるために、変数を作る -->
@@ -12,6 +13,9 @@
         </div>
         <div class="product__detail__text">
           <p> {{ product.content }} </p>
+        </div>
+        <div>
+          <a href="{{ product.url }} " class="link__detail">詳細を見る</a>
         </div>
 
         <!-- form＝データ送信、 method=情報の送り方（postで中身の情報を送る）action=データの送信先 enctype="multipart/form-data"は、ファイル名の情報を送信する  -->
@@ -42,7 +46,6 @@
             {% endif %}
             </div>
          </form>
-         <a href="{{ product.url }} " class="link__detail">詳細を見る</a>
 
       {% comment %} <img src="img/new/product-3.webp" alt="" class="img">
       <div class="product__detail">

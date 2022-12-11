@@ -181,7 +181,7 @@ header {
 
 @media (min-width: 1330px) {
   .header {
-    height: 100px;
+    height: 80px;
   }
 }
 
@@ -236,7 +236,7 @@ header {
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   left: 50%;
-  width: 150px;
+  width: 100px;
   height: auto;
 }
 
@@ -1006,6 +1006,12 @@ header {
   margin-top: 36px;
   display: block;
   text-decoration: underline;
+  margin-bottom: 36px;
+}
+
+.sec03 .popular_product .product__detail .link__detail:hover {
+  opacity: 0.5;
+  transition: 20ms;
 }
 
 .qtydiv label {
@@ -1458,6 +1464,13 @@ header {
 
   .special__contents .txt-side__txt {
     padding: 1vw 2vw;
+    color: white;
+    font-weight: bold;
+  }
+
+  .txt-side__txt>h2 {
+    color: white;
+    font-weight: bold;
   }
 }
 
