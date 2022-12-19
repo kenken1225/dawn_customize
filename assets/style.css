@@ -159,6 +159,14 @@ a {
   font-size: 13px;
 }
 
+@media (max-width: 500px) {
+  .min {
+    font-size: 18px;
+  }
+}
+
+
+
 body {
   color: #000;
   background: #fff;
@@ -1323,7 +1331,13 @@ header {
   }
 
   .sec04 .items-wrapper .item .item__content h3 {
-    font-size: 5vw;
+    font-size: 8vw;
+  }
+}
+
+@media (max-width: 500px) {
+  .collection__btn {
+    font-size: 15px;
   }
 }
 

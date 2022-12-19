@@ -5,7 +5,7 @@
         <h2>このショップについて</h2>
         <div class="Btn bgleft">
           <a href="/pages/about">
-          <span>詳しくはこちら＞</span>
+          <span class="section-about__btn" >詳しくはこちら＞</span>
           </a>
         </div>
       </div>
@@ -24,6 +24,12 @@
         -webkit-box-align: center;
         -ms-flex-align: center;
         align-items: center;
+    }
+
+    @media (max-width: 500px) {
+      .section-about__btn {
+        font-size: 20px;
+      }
     }
 
 </style>
