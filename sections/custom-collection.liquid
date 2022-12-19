@@ -12,9 +12,20 @@
       {% for product in collection.products %}
         <a href="{{ product.url }}" class="product_card">
           <!--
-            product.featured_imageは、商品のアイキャッチ画像を返してくれる. srcは、商品の情報を返してくれる（あってもなくてもいいかも）
+           <div class="reveal">〜 < class="hidden">まで、画像をホバーしたら商品変更になる
           -->
-          <img src="{{ product.featured_image.src | img_url: '3000x' }}" alt="">
+          <div class="reveal">
+            <img
+              src="{{ product.featured_image.src | img_url: '450x450' }}"
+              alt="{{ featured.featured_image.alt | escape }}"
+            >
+            <img
+              class="hidden"
+              src="{{ product.images.last | img_url: '450x450' }}"
+              alt="{{ product.images.last.alt | escape }}"
+            >
+          </div>
+          {% comment %} <img src="{{ product.featured_image.src | img_url: '3000x' }}" alt=""> {% endcomment %}
           <h3>{{ product.title }}</h3>
           <p class="price">{{ product.price | money }}</p>
           <p class="Btn bgleft"><span>詳細を見る</span></p>

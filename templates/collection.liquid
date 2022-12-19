@@ -3,14 +3,26 @@
   data-aos="zoom-out"
   data-aos-duration="3000">
 
-  <h2>新着商品</h2>
+  <h2> {{ collection.title }} </h2>
 
   <div class="collection-wrap flex">
     {% paginate collection.products by 8 %}
       {% for product in collection.products %}
         <!-- within | collection を追加することで、コレクション内の製品のプロダクトを出力してくれる -->
-      <a href=" product.url | within: collection  " class="product_card">
-        <img src=" {{ product.featured_image.src | img_url: 'large' }} " alt="">
+      <a href=" {{ product.url | within: collection }} " class="product_card">
+        <!-- <div class="reveal">〜 < class="hidden">まで、画像をホバーしたら商品変更になる -->
+        <div class="reveal">
+          <img
+            src="{{ product.featured_image.src | img_url: 'large' }}"
+            alt="{{ product.featured_image.alt | escape }}"
+          >
+          <img
+            class="hidden"
+            src="{{ product.images.last | img_url: 'large' }}"
+            alt="{{ product.images.last.alt | escape }}"
+          >
+        </div>
+        {% comment %} <img src=" {{ product.featured_image.src | img_url: 'large' }} " alt=""> {% endcomment %}
         <h3> {{ product.title }} </h3>
         <p class="price"> {{ product.price | money }} </p>
         <p class="Btn bgleft"><span>詳細を見る</span></p>

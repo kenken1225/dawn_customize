@@ -5,12 +5,26 @@
     <div class="popular_product flex">
         <!-- コレクションの中の商品を取ってくるために、変数を作る -->
         {% assign product = all_products[section.settings.toppage_product] %}
-        <img src="{{ product.featured_image.src | img_url: '3000x' }}" alt="" class="img">
-          <div class="product__detail">
-        <div class="product__detail__main">
-          <h2><span> {{ produc.title }} </span></h2>
-          <p class="price"> {{ product.price | money }} </p>
+
+        <!-- <div class="reveal">〜 < class="hidden">まで、画像をホバーしたら商品変更になる -->
+        <div class="reveal">
+          <img
+            src="{{ product.featured_image.src | img_url: '3000x' }}"
+            alt="{{ product.featured_image.alt | escape }}"
+          >
+          <img
+            class="hidden"
+            src="{{ product.images.last | img_url: '450x450' }}"
+            alt="{{ product.images.last.alt | escape }}"
+          >
         </div>
+
+        {% comment %} <img src="{{ product.featured_image.src | img_url: '3000x' }}" alt="" class="img"> {% endcomment %}
+        <div class="product__detail">
+          <div class="product__detail__main">
+            <h2><span> {{ produc.title }} </span></h2>
+            <p class="price"> {{ product.price | money }} </p>
+          </div>
         <div class="product__detail__text">
           <p> {{ product.content }} </p>
         </div>

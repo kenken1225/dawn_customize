@@ -1,0 +1,33 @@
+.page-width {
+    padding: 0 5rem;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.related__items-list {
+    justify-content: start;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 2rem;
+    row-gap: 2rem;
+}
+
+.grid__col {
+    width: calc(25% - 2rem);
+    height: 300px;
+
+}
+
+.price {
+    margin-top: 15px;
+}
+
+span .price-item .price-item--sale .price-item--last {
+    color: red;
+}
+
+.price-item--last {}

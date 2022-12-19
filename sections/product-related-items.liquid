@@ -1,0 +1,51 @@
+{{ 'related-items.css' | asset_url | stylesheet_tag }}
+
+<section class="sec sec03">
+  <div class="product__related_items page-width">
+    <h2>{{ section.settings.heading }}</h2>
+    <ul class="related__items-list">
+      {% paginate product.metafields.item.related.value by 4 %}
+        {% for product in product.metafields.item.related.value %}
+          <li class="grid__col">
+            <a href="{{ product.url }}" class="related__items-link">
+              <div class="reveal">
+                <img
+                  src="{{ product.featured_image.src | img_url: '450x450' }}"
+                  alt="{{ featured.featured_image.alt | escape }}"
+                >
+                <img
+                  class="hidden"
+                  src="{{ product.images.last | img_url: '450x450' }}"
+                  alt="{{ product.images.last.alt | escape }}"
+                >
+              </div>
+              <h3>{{ product.title | truncate: 20 }}</h3>
+              {% render 'price', product: product, price_class: '' %}
+            </a>
+          </li>
+        {% endfor %}
+      {% endpaginate %}
+    </ul>
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "関連商品(商品ページ)",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "html",
+      "id": "heading",
+      "label": "タイトル",
+      "default": "この商品を選んだ人が購入しているアイテム"
+    }
+  ],
+  "presets": [
+    {
+      "name": "関連商品(商品ページ)"
+    }
+  ]
+}
+{% endschema %}

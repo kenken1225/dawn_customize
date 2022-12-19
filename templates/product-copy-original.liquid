@@ -1,0 +1,86 @@
+<main class="product">
+    <section class="sec sec03">
+      <div class="popular_product flex">
+        <div class="product__post">
+          <div class="ProductImage">
+            <ul class="gallery">
+              {% for image in product.images %}
+                <li><img src="{{ image.src | product_img_url: 'large' }}"></li>
+              {% endfor %}
+              {% comment %}
+                 {% for image in product.images %}
+                <li><img src="{{ product.image.src | img_url: 'large' }}" alt=""></li>
+                {% endfor %}
+              {% endcomment %}
+            </ul>
+  
+            <ul class="choice-btn flex slideItemImage">
+              {% for image or media in product.images %}
+                <li>
+                  <img src="{{ image.src | product_img_url: 'large' }}">
+                  {{ media | video_tag: autoplay: true, loop: true, muted: true }}
+                </li>
+              {% endfor %}
+              {% comment %}
+                {% for image in product.images %}
+                <li><img src="{{ product.image.src | img_url: 'large' }}"></li>
+                {% endfor %}
+              {% endcomment %}
+            </ul>
+          </div>
+        </div>
+  
+        <div class="product__detail">
+          <div class="product__detail__stickey">
+            <div class="product__detail__main">
+              <p class="maison">{{ product.vendor }}</p>
+              <h2>{{ product.title }}</h2>
+              <p class="price">{{ product.price | money }}</p>
+            </div>
+            <div class="product__detail__text">
+              <p>{{ product.content }}</p>
+            </div>
+  
+            <div class="share ">
+              <p class="mini">シェア</p>
+              <div class=" flex">
+                <a href="https://twitter.com/">
+                  <img src="{{ 'twitter.jpg' | asset_img_url: 'small' }}" alt="" class="sns-img">
+                </a>
+                <a href="https://www.facebook.com/">
+                  <img src="{{ 'facebook.jpg' | asset_img_url: 'small' }}" alt="" class="sns-img">
+                </a>
+                <a href="https://www.instagram.com/"
+                  ><img src="{{ 'instagram.jpg' | asset_img_url: 'small' }}" alt="" class="sns-img">
+                </a>
+              </div>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    {% section 'custom-collection' %}
+    <!-- 商品一覧の読み込み -->
+    {% section 'custom-collection-list' %}
+    <!-- セクション一覧の読み込み -->
+  </main>
+  
+  <style>
+    .sns-img {
+      width: 30px !important;
+      height: 30px !important;
+    }
+    .sns-img:nth-child(n + 1) {
+      margin-right: 10px;
+    }
+    .mini {
+      font-size: 16px;
+    }
+  
+    .product .sec03 {
+      margin-top: 140px !important;
+    }
+  </style>
+  

@@ -165,6 +165,15 @@
                   {{ product.description }}
                 </div>
               {%- endif -%}
+
+              <!-- テスト -->
+              {%- if product.metafields.custom.special_image != blank -%}
+                <div>
+                  <img src="{{ product.metafields.custom.special_image | img_url: '250x' }}" />
+                </div>
+              {%- endif -%}
+
+
             {%- when 'sku' -%}
               <p
                 class="product__sku no-js-hidden{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.sku.size == 0 %} visibility-hidden{% endif %}"
