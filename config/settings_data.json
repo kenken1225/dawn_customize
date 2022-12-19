@@ -254,7 +254,7 @@
         "settings": {
           "toppage_text": "2022 NEW COLLECTION",
           "bold-text": false,
-          "toppage_font_size": 18,
+          "toppage_font_size": 24,
           "toppage_collection": "recommendation"
         }
       },
@@ -263,8 +263,8 @@
         "settings": {
           "toppage_product": "autumn-shoes",
           "toppage_text": "土曜限定販売の大人気商品",
-          "bold-text": false,
-          "toppage_font_size": 18
+          "bold-text": true,
+          "toppage_font_size": 24
         }
       },
       "custom-collection-list": {
