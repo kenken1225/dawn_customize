@@ -51,48 +51,68 @@
           </div>
 
           <!-- テスト（メタフィールド） -->
-          {% comment %} {%- if product.metafields.custom.special_image != blank -%}
-            <div>
-              <img src="{{ product.metafields.custom.special_image | img_url: '250x' }}">
-            </div>
-          {%- endif -%} {% endcomment %}
+          {% comment %}
+            {%- if product.metafields.custom.special_image != blank -%}
+              <div>
+                <img src="{{ product.metafields.custom.special_image | img_url: '250x' }}">
+              </div>
+            {%- endif -%}
+          {% endcomment %}
 
-          <!-- form＝データ送信、 method=情報の送り方（postで中身の情報を送る）action=データの送信先 enctype="multipart/form-data"は、ファイル名の情報を送信する  -->
-          <form method="post" action="/cart/add" enctype="multipart/form-data" class="product__wrap" > <!-- /car/add はshopifyがデフォルトで商品を追加するコードになってる -->
-              <label for="#">サイズ</label>
-            <select name="product-variants" id="product-variants">
+          <!--
+            form＝データ送信、 method=情報の送り方（postで中身の情報を送る）action=データの送信先 enctype="multipart/form-data"は、ファイル名の情報を送信する
+          -->
+          <form method="post" action="/cart/add" enctype="multipart/form-data" class="product__wrap">
+            {% if product.variants != blank %}
+                <!-- /car/add はshopifyがデフォルトで商品を追加するコードになってる -->
+              <label for="#"> サイズ </label>
+              <select name="" id="">
                 {% for variant in product.variants %}
-                    <option value=" {{ variant.id }} "> {{ variant.title }} </option>
+                  <option value=" {{ variant.id }} ">{{ variant.title }}</option>
                 {% endfor %}
-            </select>
+              </select>
+            {% endif %}
+            
 
             <div class="qtydiv counter">
-                <div class="qtybox">
-                    <span class="btnqty qtyminus icon icon-minus" ><i class="fas fa-minus"></i></span>
-                    <!-- inputタグは、いろんな種類の入力欄を作るためのタグ。typeで種類を選ぶ -->
-                    <span><input type="text" id="quantity" name="quantity" value="1" min="1" class="quantity-selector quantity-input" readonly="" ></span>
-                    <span class="btnqty qtyplus icon icon-plus" ><i class="fas fa-plus"></i></span>
-                </div>
+              <div class="qtybox">
+                <span class="btnqty qtyminus icon icon-minus"><i class="fas fa-minus"></i></span>
+                <!-- inputタグは、いろんな種類の入力欄を作るためのタグ。typeで種類を選ぶ -->
+                <span
+                  ><input
+                    type="text"
+                    id="quantity"
+                    name="quantity"
+                    value="1"
+                    min="1"
+                    class="quantity-selector quantity-input"
+                    readonly=""
+                ></span>
+                <span class="btnqty qtyplus icon icon-plus"><i class="fas fa-plus"></i></span>
+              </div>
             </div>
 
-            <!--  {{ product.variants.first.id }}は、一つ一つの商品のIDを呼び出したいから、first.idを記述 -->
-            <input type="hidden" name="id" value= "{{ product.variants.first.id }}">
-            <!--  product.selected_or_first_available_variantで、 -->
+            <!-- {{ product.variants.first.id }}は、一つ一つの商品のIDを呼び出したいから、first.idを記述 -->
+            <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+            <!-- product.selected_or_first_available_variantで、 -->
             {% assign current_variant = product.selected_or_first_available_variant %}
             <!-- variant.inventory_quantityは、バリアントの在庫数を返す -->
             {% if current_variant.inventory_quantity > 0 %}
-            <button href="#" class="Btn02 bgleft02">
+              <button href="#" class="Btn02 bgleft02">
                 <span>カートに追加する</span>
-            </button>
-            <!-- 現在の残り在庫数が10個以下なら -->
-            {% if current_variant.inventory_quantity < 10 %}
-                <span style="color: red;" > 残り在庫は{{ current_variant.inventory_quantity }}個です </span>
-            {% endif %}
+              </button>
+              <!-- 現在の残り在庫数が10個以下なら -->
+              {% if current_variant.inventory_quantity < 10 %}
+                <span style="color: red;"> 残り在庫は{{ current_variant.inventory_quantity }}個です </span>
+              {% endif %}
             {% else %}
-            <div class="Btn02"><span>在庫なし</span></div>
+              <div class="Btn02"><span>在庫なし</span></div>
             {% endif %}
-            </div>
-              <p class="alert">あと<span>7時間0分</span>以内のご注文確定で{{ 'today' | date:'%m月%d日' }}〜{{ 'today' | date: '%s' | plus: 86400 | date:'%m月%d日' }}の間に商品を受け取る</p>
+            <p class="alert">
+              あと<span>7時間0分</span>以内のご注文確定で{{ 'today' | date: '%m月%d日' }}〜
+              {{- 'today' | date: '%s' | plus: 86400 | date: '%m月%d日' -}}
+              の間に商品を受け取る
+            </p>
           </form>
         </div>
       </div>
@@ -101,11 +121,9 @@
 
   <!-- もし商品のメタフィールドにものがあったら、表示させる -->
 
-
   {% if product.metafields.item.related != blank %}
     {% section 'product-related-items' %}
   {% endif %}
-
 
   {% section 'custom-collection' %}
   <!-- 商品一覧の読み込み -->
