@@ -1129,6 +1129,7 @@ header {
 
   .sec03 .popular_product .product__detail .price {
     text-align-last: center;
+    font-size: 30px;
   }
 
   .sec03 .popular_product .product__detail__main {

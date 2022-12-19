@@ -1,49 +1,58 @@
 <section class="sec05 sec">
-    <div class="bkimg__contents-customize flex video">
-      <div class="bkimg__contents__txtBox">
-        <p class="min">店舗へのご来店もお待ちしております</p>
-        <h2>このショップについて</h2>
-        <div class="Btn bgleft">
-          <a href="/pages/about">
-          <span class="section-about__btn" >詳しくはこちら＞</span>
-          </a>
-        </div>
+  <div class="bkimg__contents-customize flex video">
+    <div class="bkimg__contents__txtBox">
+      <p class="min">店舗へのご来店もお待ちしております</p>
+      <h2>このショップについて</h2>
+      <div class="Btn bgleft">
+        <a href="/pages/about">
+          <span class="section-about__btn">詳しくはこちら＞</span>
+        </a>
       </div>
     </div>
-
-  </section>
-
+  </div>
+</section>
 
 <style>
+  .sec05 .bkimg__contents-customize {
+      background-image:url('{{ section.settings.content-img | img_url: '4000x'}}');
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+      height: 800px;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+  }
+
+  @media (max-width: 500px) {
+    .section-about__btn {
+      font-size: 20px;
+    }
+
     .sec05 .bkimg__contents-customize {
-        background-image:url('{{ section.settings.content-img | img_url: '4000x'}}');
-        background-attachment: fixed;
-        background-size: cover;
-        background-position: center;
-        height: 800px;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        align-items: center;
-    }
+      background-image:url('{{ section.settings.content-img | img_url: '1000x'}}');
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+      height: 800px;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+  }
 
-    @media (max-width: 500px) {
-      .section-about__btn {
-        font-size: 20px;
-      }
-    }
-
+  }
 </style>
 
 {% schema %}
+{
+  "name": "アバウトセクション",
+  "class": "video",
+  "settings": [
     {
-        "name": "アバウトセクション",
-        "class": "video",
-        "settings": [
-            {
-            "type": "image_picker",
-            "id": "content-img",
-            "label": "画像を選択する"
-            }
-        ]
+      "type": "image_picker",
+      "id": "content-img",
+      "label": "画像を選択する"
     }
+  ]
+}
 {% endschema %}
