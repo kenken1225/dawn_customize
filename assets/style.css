@@ -70,6 +70,10 @@ a {
     margin-top: 2vw;
     width: 80%;
   }
+
+  .Btn02 span {
+    font-size: 16px;
+  }
 }
 
 .Btn02 span {
@@ -80,6 +84,7 @@ a {
   -webkit-transition: all .5s;
   transition: all .5s;
 }
+
 
 .Btn02:hover span {
   color: #B1BDC5;
@@ -1125,6 +1130,7 @@ header {
   .sec03 .popular_product .product__detail .Btn02 {
     width: 90%;
     text-align-last: center;
+    margin-top: 40px;
   }
 
   .sec03 .popular_product .img {
@@ -2248,7 +2254,7 @@ footer .footer__inner {
 // =============================================== */
 
 .reveal .hidden {
-  display: block !important;
+  display: block;
   visibility: visible !important;
 }
 
@@ -2258,7 +2264,9 @@ footer .footer__inner {
 
 .reveal {
   position: relative;
+  width: 100%;
 }
+
 
 .reveal .hidden {
   position: absolute;
@@ -2303,5 +2311,17 @@ footer .footer__inner {
 @media (min-width: 480px) and (max-width: 979px) {
   .reveal .caption {
     font-size: 11px;
+  }
+}
+
+
+@media screen and (max-width: 480px) {
+
+  .
+
+  /* 480px以下に適用されるCSS（スマホ用） */
+  .reveal>img {
+    width: 100% !important;
+    height: 100% !important;
   }
 }
