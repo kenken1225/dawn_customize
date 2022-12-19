@@ -254,7 +254,7 @@
         "settings": {
           "toppage_text": "2022 NEW COLLECTION",
           "bold-text": false,
-          "toppage_font_size": 24,
+          "toppage_font_size": 22,
           "toppage_collection": "recommendation"
         }
       },
@@ -339,6 +339,12 @@
       "custom-footer": {
         "type": "custom-footer",
         "settings": {
+        }
+      },
+      "product-related-items": {
+        "type": "product-related-items",
+        "settings": {
+          "heading": "この商品を選んだ人が購入しているアイテム"
         }
       }
     },
