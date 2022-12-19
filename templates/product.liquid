@@ -64,7 +64,7 @@
           -->
           <form method="post" action="/cart/add" enctype="multipart/form-data" class="product__wrap">
             {% if product.variants != blank %}
-                <!-- /car/add はshopifyがデフォルトで商品を追加するコードになってる -->
+              <!-- /car/add はshopifyがデフォルトで商品を追加するコードになってる -->
               <label for="#"> サイズ </label>
               <select name="" id="">
                 {% for variant in product.variants %}
@@ -72,8 +72,6 @@
                 {% endfor %}
               </select>
             {% endif %}
-            
-
             <div class="qtydiv counter">
               <div class="qtybox">
                 <span class="btnqty qtyminus icon icon-minus"><i class="fas fa-minus"></i></span>
