@@ -896,7 +896,7 @@ header {
   }
 
   .sec .collection-wrap .product_card h3 {
-    font-size: 13px;
+    font-size: 20px;
   }
 }
 
@@ -909,6 +909,13 @@ header {
   .sec .collection-wrap {
     padding-right: 20px;
     padding-left: 20px;
+  }
+
+  .sec .collection-wrap .product_card .price {
+    margin-top: 15px;
+    margin-bottom: 35px;
+    text-align-last: left;
+    font-size: 5.2vw;
   }
 }
 
