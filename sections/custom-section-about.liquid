@@ -1,4 +1,4 @@
-<section class="sec05 sec">
+<section class="sec05 sec sec__about">
   <div class="bkimg__contents-customize flex video">
     <div class="bkimg__contents__txtBox">
       <p class="min">店舗へのご来店もお待ちしております</p>
@@ -13,6 +13,10 @@
 </section>
 
 <style>
+  .sec__about{
+    max-width: 100%;
+    height: auto;
+  }
   .sec05 .bkimg__contents-customize {
       background-image:url('{{ section.settings.content-img | img_url: '4000x'}}');
       background-attachment: fixed;
