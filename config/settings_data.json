@@ -253,8 +253,8 @@
         "type": "custom-collection",
         "settings": {
           "toppage_text": "2022 NEW COLLECTION",
-          "bold-text": false,
-          "toppage_font_size": 22,
+          "bold-text": true,
+          "toppage_font_size": 24,
           "toppage_collection": "recommendation"
         }
       },
