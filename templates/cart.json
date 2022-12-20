@@ -31,8 +31,8 @@
     "featured-collection": {
       "type": "featured-collection",
       "settings": {
-        "title": "Featured collection",
-        "heading_size": "h2",
+        "title": "おすすめ商品",
+        "heading_size": "h0",
         "description": "",
         "show_description": false,
         "description_style": "body",
@@ -50,9 +50,9 @@
         "show_rating": false,
         "enable_quick_add": false,
         "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "swipe_on_mobile": true,
+        "padding_top": 28,
+        "padding_bottom": 28
       }
     }
   },
