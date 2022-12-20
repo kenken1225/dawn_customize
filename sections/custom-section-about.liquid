@@ -13,19 +13,20 @@
 </section>
 
 <style>
-  .sec__about{
+  .sec__about {
     max-width: 100%;
     height: auto;
   }
+
   .sec05 .bkimg__contents-customize {
-      background-image:url('{{ section.settings.content-img | img_url: '4000x'}}');
-      background-attachment: fixed;
-      background-size: cover;
-      background-position: center;
-      height: 800px;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
-      align-items: center;
+    background-image: url('{{ section.settings.content-img | img_url: '4000x'}}');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    height: 800px;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
   }
 
   @media (max-width: 500px) {
@@ -34,7 +35,7 @@
     }
 
     .sec05 .bkimg__contents-customize {
-      background-image:url('{{ section.settings.content-img | img_url: '1000x'}}');
+      background-image: url('{{ section.settings.content-img | img_url: '1000x'}}');
       background-attachment: fixed;
       background-size: cover;
       background-position: center;
@@ -42,8 +43,7 @@
       -webkit-box-align: center;
       -ms-flex-align: center;
       align-items: center;
-  }
-
+    }
   }
 </style>
 
