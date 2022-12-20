@@ -60,25 +60,17 @@
           -->
           <form method="post" action="/cart/add" enctype="multipart/form-data" class="product__wrap">
             <!-- もし、variants（商品のオプション）がこの項目にあったら表示 -->
-            {% if product.variants %}
               <!-- /car/add はshopifyがデフォルトで商品を追加するコードになってる -->
               <label for="#"> サイズ </label>
               <select
                 name="product.variants"
                 id="product__variants"
-                {% if variant.name = 'default' %}
-                  class="label--hidden"
-                {% endif %}
               >
                 {% for variant in product.variants %}
-                  {% if variant.available %}
                     <option value=" {{ variant.id }} ">{{ variant.title }}</option>
-                  {% else %}
-                    <option value=" {{ variant.id }} ">なし</option>
-                  {% endif %}
                 {% endfor %}
               </select>
-            {% endif %}
+
             <div class="qtydiv counter">
               <div class="qtybox">
                 <span class="btnqty qtyminus icon icon-minus"><i class="fas fa-minus"></i></span>
