@@ -7,11 +7,6 @@
             {% for image in product.images %}
               <li><img src="{{ image.src | product_img_url: 'large' }}"></li>
             {% endfor %}
-            {% comment %}
-               {% for image in product.images %}
-              <li><img src="{{ product.image.src | img_url: 'large' }}" alt=""></li>
-              {% endfor %}
-            {% endcomment %}
           </ul>
 
           <ul class="choice-btn flex slideItemImage">
@@ -60,15 +55,27 @@
           {% endcomment %}
 
           <!--
-            form＝データ送信、 method=情報の送り方（postで中身の情報を送る）action=データの送信先 enctype="multipart/form-data"は、ファイル名の情報を送信する
+            form＝データ送信、 method=情報の送り方（postで中身の情報を送る）action=データの送信先
+            enctype="multipart/form-data"は、ファイル名の情報を送信する
           -->
           <form method="post" action="/cart/add" enctype="multipart/form-data" class="product__wrap">
-            {% if product.variants != blank %}
+            <!-- もし、variants（商品のオプション）がこの項目にあったら表示 -->
+            {% if product.variants %}
               <!-- /car/add はshopifyがデフォルトで商品を追加するコードになってる -->
               <label for="#"> サイズ </label>
-              <select name="" id="">
+              <select
+                name="product.variants"
+                id="product__variants"
+                {% if variant.name = 'default' %}
+                  class="label--hidden"
+                {% endif %}
+              >
                 {% for variant in product.variants %}
-                  <option value=" {{ variant.id }} ">{{ variant.title }}</option>
+                  {% if variant.available %}
+                    <option value=" {{ variant.id }} ">{{ variant.title }}</option>
+                  {% else %}
+                    <option value=" {{ variant.id }} ">なし</option>
+                  {% endif %}
                 {% endfor %}
               </select>
             {% endif %}
@@ -144,5 +151,9 @@
   .product .sec03 {
     margin-top: 100px !important;
     margin-bottom: 50px !important;
+  }
+
+  .label--hidden {
+    display: none;
   }
 </style>
