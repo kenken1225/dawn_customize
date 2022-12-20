@@ -13,16 +13,19 @@
 </section>
 
 <style>
-  .sec05 .bkimg__contents-customize {
-    background-image: url('{{ section.settings.content-img | img_url: '4000x'}}');
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center;
-    height: 800px;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-  }
+  @media (min-width: 960px) {
+      .sec05 .bkimg__contents-customize {
+      background-image: url('{{ section.settings.content-img | img_url: '4000x'}}');
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+      height: 800px;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      }
+    }
+
 
   @media (max-width: 500px) {
     .section-about__btn {
@@ -30,7 +33,7 @@
     }
 
     .sec05 .bkimg__contents-customize {
-      {% comment %} background-image: url('{{ section.settings.content-img | img_url: '1000x'}}'); {% endcomment %}
+      background-image: url('{{ section.settings.content-img | img_url: '1000x'}}');
       background-size: cover;
       background-position: center;
       height: 600px;
