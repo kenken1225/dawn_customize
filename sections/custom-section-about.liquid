@@ -30,7 +30,7 @@
     }
 
     .sec05 .bkimg__contents-customize {
-      background-image: url('{{ section.settings.content-img | img_url: '1000x'}}');
+      {% comment %} background-image: url('{{ section.settings.content-img | img_url: '1000x'}}'); {% endcomment %}
       background-size: cover;
       background-position: center;
       height: 600px;
