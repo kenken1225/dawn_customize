@@ -346,6 +346,14 @@
         "settings": {
           "heading": "この商品を選んだ人が購入しているアイテム"
         }
+      },
+      "custom-popup": {
+        "type": "custom-popup",
+        "settings": {
+          "popup_text": "default text. default text.",
+          "popup_expire": 14,
+          "pop-img": "shopify:\/\/shop_images\/pop-img.jpg"
+        }
       }
     },
     "content_for_index": [
