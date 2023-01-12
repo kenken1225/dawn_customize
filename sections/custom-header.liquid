@@ -164,6 +164,12 @@
   .header .logo{
   width: {{ section.settings.image_width }}px;
   }
+
+  @media (max-width: 450px) {
+    .header .logo {
+      width: 90px;
+    }
+  }
 </style>
 
 {% schema %}
