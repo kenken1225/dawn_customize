@@ -1,103 +1,120 @@
- <!--
-    10行目-- link.title | handleize  --
-    shopifyのほとんどのオブジェクト（商品、コレクション、ブログ、記事、メニュー）には、ハンドル（product,collectionとか）がある。
-    handleizeを使用することで対象のオブジェクトをすべて一つのオブジェクト(link.title)に変形させる -->
+<!--
+  10行目-- link.title | handleize  --
+  shopifyのほとんどのオブジェクト（商品、コレクション、ブログ、記事、メニュー）には、ハンドル（product,collectionとか）がある。
+  handleizeを使用することで対象のオブジェクトをすべて一つのオブジェクト(link.title)に変形させる
+-->
 
 <header class="header">
-    <div class="header_inner">
-      <nav class="nav">
-        <ul class="nav_list">
-        {% for link in linklists.main-menu.links %} <!-- linklist.〜　で、〇〇の配列を呼び出す。今回は、メインメニューの中の配列（モノ）を呼び出す-->
-            {% assign child_list_handle = link.title | handleize %} <!-- 各小要素（サブメニュー）を呼び出すために変数をつくる -->
-            {% if linklists[child_list_handle].links != blank %} <!-- []の中は、各小要素（サブメニュー） -->
-                  <li class="has-child"><a href="{{ link.url }}">{{ link.title }}</a>
-                    <!-- 小要素 -->
-                    <ul>
-                        {% for childlink in linklists[child_list_handle].links %}
-                            {% assign son_list_handle = childlink.title | handleize %}
-                                {% if linklists[son_list_handle].links != blank %}
-                                    <li class="has-child"><a href="{{ childlink.url }}">{{ childlink.title }}</a>
-                                      <!-- 孫要素 -->
-                                      <ul>
-                                        {% for sonlink in linklists[son_list_handle].links %}
-                                          <li><a href="{{ sonlink.url }}">{{ sonlink.title }}</a></li>
-                                        {% endfor %}
-                                      </ul>
-                                    </li>
-                                    {%else%}
-                                    <li><a href="{{ childlink.url }}">{{ childlink.title }}</a></li>
-                                {% endif %}
-                        {% endfor %}
-                    </ul>
-                </li>
-            {% else %}
-            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-            {% endif %}
-        {% endfor %}
-        </ul>
-      </nav>
-
-        {% comment %} <ul class="nav_list">
-          <li><a href="#">Top</a></li>
-          <li><a href="#">このショップについて</a></li>
-          <li class="has-child"><a href="#">商品一覧</a><!--子要素を持つ li にはhas-childというクラス名をつける-->
-            <ul>
-            <li><a href="#">Service Top</a></li>
-            <li><a href="#">Service-1</a></li>
-            <li class="has-child"><a href="#">Service-2</a>
+  <div class="header_inner">
+    <nav class="nav">
+      <ul class="nav_list">
+        {% for link in linklists['main-menu'].links %}
+          <!-- linklist.〜　で、〇〇の配列を呼び出す。今回は、メインメニューの中の配列（モノ）を呼び出す -->
+          {% assign child_list_handle = link.title | handleize %}
+          <!-- 各小要素（サブメニュー）を呼び出すために変数をつくる -->
+          {% if linklists[child_list_handle].links != blank %}
+            <!-- []の中は、各小要素（サブメニュー） -->
+            <li class="has-child">
+              <a href="{{ link.url }}">{{ link.title }}</a>
+              <!-- 小要素 -->
               <ul>
-              <li><a href="#">Service-2 Top</a></li>
-              <li><a href="#">Service-2-1</a></li>
-              <li><a href="#">Service-2-2</a></li>
-              <li><a href="#">Service-2-3</a></li>
-              <li><a href="#">Service-2-4</a></li>
+                {% for childlink in linklists[child_list_handle].links %}
+                  {% assign son_list_handle = childlink.title | handleize %}
+                  {% if linklists[son_list_handle].links != blank %}
+                    <li class="has-child">
+                      <a href="{{ childlink.url }}">{{ childlink.title }}</a>
+                      <!-- 孫要素 -->
+                      <ul>
+                        {% for sonlink in linklists[son_list_handle].links %}
+                          <li>
+                            <a href="{{ sonlink.url }}">{{ sonlink.title }}</a>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    </li>
+                  {% else %}
+                    <li>
+                      <a href="{{ childlink.url }}">{{ childlink.title }}</a>
+                    </li>
+                  {% endif %}
+                {% endfor %}
               </ul>
-           </li>
-           <li><a href="#">Service-3</a></li>
-          </ul>
-          </li>
-          <li class="has-child"><a href="#">Blog</a>
-            <ul>
-            <li><a href="#">Blog Top</a></li>
-            <li><a href="#">Blog-1</a></li>
-            <li><a href="#">Blog-2</a></li>
-            <li><a href="#">Blog-3</a></li>
-            <li><a href="#">Blog-4</a></li>
-            </ul>
-          </li>
-        </ul>
-        </nav> {% endcomment %}
-    </div>
-    <div class="hamburger" id="js-hamburger">
-      <span class="hamburger_border hamburger_border_top"></span>
-      <span class="hamburger_border hamburger_border_center"></span>
-      <span class="hamburger_border hamburger_border_bottom"></span>
-    </div>
-    <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset logo header__custom">
-      {%- if section.settings.logo != blank -%}
-        {%- assign logo_alt = section.settings.logo.alt | default: shop.name | escape -%}
-        {%- assign logo_height = section.settings.logo_width | divided_by: section.settings.logo.aspect_ratio -%}
-        {{ section.settings.logo | image_url: width: 500 | image_tag:
-          width: section.settings.logo_width,
-          alt: logo_alt
-        }}
-      {%- else -%}
-        <span class="h2">{{ shop.name }}</span>
-      {%- endif -%}
-    </a>
+            </li>
+          {% else %}
+            <li>
+              <a href="{{ link.url }}">{{ link.title }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </nav>
 
-    {% comment %} <a href="#" class="logo">
-      <img src="{{ section.settings.header_image }}" alt="">
-    </a> {% endcomment %}
-    <ul class="icon-wrap">
-      <li><a href="/cart" id="openbtn" class="openbtn"><i class="fas fa-shopping-cart"></i></a></li>
-      {% if {{ cart.item_count }} > 0 %}
-        <span> {{ cart.item_count }} </span>
-      {% endif %}
-    </ul>
-    <div class="black_bg" id="js-black-bg"></div>
-    <!--カートのサイドバー-->
-    {% comment %} <div id="sidebar-cart" class="Drawer-Right">
+    {% comment %}
+      <ul class="nav_list">
+        <li><a href="#">Top</a></li>
+        <li><a href="#">このショップについて</a></li>
+        <li class="has-child"><a href="#">商品一覧</a><!--子要素を持つ li にはhas-childというクラス名をつける-->
+          <ul>
+          <li><a href="#">Service Top</a></li>
+          <li><a href="#">Service-1</a></li>
+          <li class="has-child"><a href="#">Service-2</a>
+            <ul>
+            <li><a href="#">Service-2 Top</a></li>
+            <li><a href="#">Service-2-1</a></li>
+            <li><a href="#">Service-2-2</a></li>
+            <li><a href="#">Service-2-3</a></li>
+            <li><a href="#">Service-2-4</a></li>
+            </ul>
+         </li>
+         <li><a href="#">Service-3</a></li>
+        </ul>
+        </li>
+        <li class="has-child"><a href="#">Blog</a>
+          <ul>
+          <li><a href="#">Blog Top</a></li>
+          <li><a href="#">Blog-1</a></li>
+          <li><a href="#">Blog-2</a></li>
+          <li><a href="#">Blog-3</a></li>
+          <li><a href="#">Blog-4</a></li>
+          </ul>
+        </li>
+      </ul>
+      </nav>
+    {% endcomment %}
+  </div>
+  <div class="hamburger" id="js-hamburger">
+    <span class="hamburger_border hamburger_border_top"></span>
+    <span class="hamburger_border hamburger_border_center"></span>
+    <span class="hamburger_border hamburger_border_bottom"></span>
+  </div>
+  <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset logo header__custom">
+    {%- if section.settings.logo != blank -%}
+      {%- assign logo_alt = section.settings.logo.alt | default: shop.name | escape -%}
+      {%- assign logo_height = section.settings.logo_width | divided_by: section.settings.logo.aspect_ratio -%}
+      {{ section.settings.logo | image_url: width: 500 | image_tag: width: section.settings.logo_width, alt: logo_alt }}
+    {%- else -%}
+      <span class="h2">{{ shop.name }}</span>
+    {%- endif -%}
+  </a>
+
+  <a href="#" class="logo">
+    <img src="{{ section.settings.header_image }}" alt="">
+  </a>
+  <ul class="icon-wrap">
+    <li>
+      <a href="/cart" id="openbtn" class="openbtn">
+        {% if cart.item_count > 0 %}
+          <span> {{ cart.item_count }} </span>
+        {% endif %}
+        <i class="fas fa-shopping-cart"></i>
+      </a>
+    </li>
+  </ul>
+  <div class="black_bg" id="js-black-bg"></div>
+
+  <!-- カートのサイドバー -->
+  {% comment %}
+    <div id="sidebar-cart" class="Drawer-Right">
       <div class="sidebar-cart__header">
         <span class="sidebar-cart__header__text">カート</span>
       </div>
@@ -130,9 +147,10 @@
           </div>
         </div>
       </form>
-    </div> {% endcomment %}
-    <!--カートのサイドバーここまで-->
-  </header>
+    </div>
+  {% endcomment %}
+  <!-- カートのサイドバーここまで -->
+</header>
 
 <style>
   .header {
@@ -143,34 +161,36 @@
     margin: 0px;
   }
 
+  .header .logo{
+  width: {{ section.settings.image_width }}px;
+  }
 </style>
 
-
 {% schema %}
-  {
-    "name": "ヘッダー",
-    "settings":[
-      {
-        "type": "image_picker",
-        "id": "logo",
-        "label": "t:sections.header.settings.logo.label"
-      },
-      {
-        "type": "range",
-        "id": "image_width",
-        "default": 120,
-        "label": "画像の大きさ",
-        "min": 120,
-        "max": 200,
-        "step": 20,
-        "unit": "px"
-      },
-      {
+{
+  "name": "ヘッダー",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "t:sections.header.settings.logo.label"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "default": 120,
+      "label": "画像の大きさ",
+      "min": 120,
+      "max": 200,
+      "step": 20,
+      "unit": "px"
+    },
+    {
       "type": "color",
       "id": "background-color",
       "label": "背景色",
       "default": "#ffffff"
-      }
-    ]
-  }
+    }
+  ]
+}
 {% endschema %}

@@ -1,0 +1,325 @@
+  <div class="popup_overlay" id="modal">
+  <div class="pop__inner">
+    <button class="pop__close" type="button" id="modal__close"></button>
+    <div class="pop__content">
+      <div class="pop__image">
+        {% comment %} <div class="pop__image-content">{{ section.settings.pop-img | image_url: width: 1450 | image_tag }}</div> {% endcomment %}
+        {{ section.settings['pop-img'] | image_url: width: 1450 | image_tag }}
+        {% comment %} <img class="pop__image-content" src=" {{section.settings.pop-img}} | img_url: '4000x' " alt=""> {% endcomment %}
+      </div>
+      <div class="pop__content-inner">
+        <div class="pop__conent-rapper">
+          <h2>Get Our Email Letter</h2>
+          <div class="pop_desc">
+            Subscribe to the Arito Store mailing list to receive updates on special offers and other discount
+            information.
+          </div>
+          <form action="" method="post" name="sucscribe-form" target="_blank">
+            <div class="form__wrap">
+              <input
+                class="js-input-pop form-control pop-form__input"
+                type="email"
+                name="EMAIL"
+                placeholder=" Enter your email(Test)..."
+                required
+              >
+              <button class="pop__btn"><span>購読する</span></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+{% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script> {% endcomment %}
+
+{% style %}
+  .popup_overlay {
+      /* display: none; */
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      position: fixed;
+      z-index: 1001;
+      top: 0;
+      left: 0;
+      /* opacity: 0;
+      visibility: hidden; */
+      transition: 0.5s;
+    }
+
+  .active{
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .active2{
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .pop__inner{
+    position: absolute;
+    max-width: 98vw;
+    max-height: 90vh;
+    width: 920px;
+    height: 520px;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+  }
+
+  /* ばつ矢印 */
+  .pop__close{
+  top: 22px;
+  right: 12px;
+  display: inline-block;
+  color: #333;
+  width: 27px;
+  height: 3px;
+  background: currentColor;
+  border-radius: 0.1em; /*1emはfont-size値を基準とした値(0.1倍) */
+  position: absolute;
+  transform: rotate(45deg);
+  }
+
+  .pop__close::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  border-radius: inherit;
+  transform: rotate(90deg);
+  }
+
+  .pop__content{
+    background: #fff;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .pop__image{
+    flex: 0 0 auto;
+    width: 45%;
+    display: block;
+  }
+
+  .pop__image img{
+    max-width: 100%;
+    width: auto;
+    height: auto;
+  }
+  .pop__content-inner{
+    width: 55%;
+    display: flex;
+    padding: 10px 40px;
+    text-align: left;
+    align-items: center;
+  }
+  .pop__conent-rapper{
+    padding: 2.5rem:
+  }
+  .pop__conent-rapper h2{
+    font-size: 45px;
+    margin-bottom: 20px;
+  }
+
+  .pop_desc{
+    margin: 10px auto 10px;
+    font-size: 19px;
+  }
+
+  .form__wrap{
+  }
+
+  .pop__conent-rapper form{
+    margin: 10px auto 10px:
+  }
+
+  .pop__btn{
+    margin: 28px auto 10px;
+    padding: 12px 49px;
+    background: #343434;
+    border: 0;
+    color: #fff;
+    position: relative;
+    transition: all.2s;
+  }
+  .pop__btn:hover{
+    opacity: 0.8;
+
+  }
+  .pop__btn:not(:disabled){
+    cursor: pointer;
+  }
+
+  .pop-form__input{
+    display: block;
+    margin: 25px auto 13px;
+    width: 100%;
+    padding: 0.1rem 0rem;
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #54504f;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    appearance: none;
+    border-radius: 0;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  }
+  /* モーダル */
+  /* .is-show{
+    display: none;
+  } */
+
+  .is-show {
+  opacity: 1;
+  visibility: visible;
+  }
+
+  .fadeout {
+  animation : fadeOut 0.5s;
+  animation-fill-mode: both;
+  }
+  @keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+  }
+
+  @media screen and (max-width: 480px) {
+    .pop__image {
+      display: none;
+    }
+    .pop__content-inner {
+      width: 100%;
+      padding: 30px 40px;
+    }
+    .pop__conent-rapper h2{
+      font-size: 33px;
+    }
+    .pop_desc{
+      font-size: 16px;
+    }
+
+  }
+{% endstyle %}
+
+{% comment %}
+  sessionStorageは初回アクセス時のみポップアップを表示させるイベントで、
+  Webページのセッションが続いている間データを保存しておけるもの
+{% endcomment %}
+
+<script>
+
+  window.addEventListener('DOMContentLoaded', function(){
+    $("#modal").show();
+    $.cookie('popupbtnFlg') == 'on'?$("#modal").hide():$("#modal").show();
+    $("#modal__close").click(function(){
+      $("#modal").fadeOut();
+      $.cookie('popupbtnFlg', 'on', { expires: {{ section.settings.popup_expire }} , path: '/' }); //cookieの保存
+    });
+  });
+
+</script>
+
+{% comment %} <script>
+  const modal = document.getElementById('modal');
+  const modalClose = document.getElementById('modal__close');
+
+  if (!sessionStorage.getItem('visited')) {
+    sessionStorage.setItem('visited', 'first');
+    window.addEventListener('load', function () {
+      modal.classList.add('active');
+    });
+  }else {
+    window.addEventListener('load', function () {
+      modal.classList.remove('active');
+    });
+  }
+
+  modalClose.addEventListener('click', function () {
+    modal.classList.add('active2');
+    setTimeout(function() {
+      modal.classList.remove('active');
+      {% comment %} modal.classList.remove('active2'); {% endcomment %}
+    }, 300);
+  })
+
+{% comment %} const is_modal_show = sessionStorage.getItem('sessionStorage');
+  const modal = document.getElementById('modal');
+  const close = document.getElementById('modal__close');
+
+ if (is_modal_show != 'alreadyShow') {
+
+  close.addEventListener('click', () => {
+    modal.classList.add('fadeout'); //クラスを追加
+    close.classList.add('fadeout');
+    setTimeout(() => {
+      modal.style.display = 'none';
+      close.style.display = 'none';
+    }, '1000')
+  });
+
+  sessionStorage.setItem('alreadyShow', 'alredy shown');
+
+  } {% endcomment %}
+</script> {% endcomment %}
+
+{% schema %}
+{
+  "name": {
+    "ja": "ポップアップ"
+  },
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "popup_text",
+      "label": {
+        "ja": "本文(改行には<br>を使用すること)"
+      },
+      "default": {
+        "ja": "default text. default text."
+      }
+    },
+    {
+      "id": "popup_expire",
+      "type": "range",
+      "label": "次のポップアップが現れるまでの日数",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "default": 14
+    },
+    {
+      "type": "image_picker",
+      "id": "pop-img",
+      "label": "画像選択"
+    }
+  ],
+  "presets": [
+    {
+      "name": {
+        "ja": "ポップアップ"
+      },
+      "category": {
+        "ja": "オリジナル"
+      }
+    }
+  ]
+}
+{% endschema %}
