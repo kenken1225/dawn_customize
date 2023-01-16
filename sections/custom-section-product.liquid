@@ -19,11 +19,20 @@
           >
         </div>
 
-        {% comment %} <img src="{{ product.featured_image.src | img_url: '3000x' }}" alt="" class="img"> {% endcomment %}
         <div class="product__detail">
           <div class="product__detail__main">
             <h2><span> {{ produc.title }} </span></h2>
-            <p class="price"> {{ product.price | money }} </p>
+
+            <span class="price price__box">
+              {% if product.compare_at_price > product.price and product.available %}
+                <span class="price__original">{{ product.price | money }}</span>
+                <span class="prie__compare"> {{ product.compare_at_price | money }} </span>
+              {% else %}
+                <span class="price__original">{{ product.price | money }}</span>
+              {% endif %}
+            </span>
+
+            {% comment %} <p class="price"> {{ product.price | money }} </p> {% endcomment %}
           </div>
         <div class="product__detail__text">
           <p> {{ product.content }} </p>

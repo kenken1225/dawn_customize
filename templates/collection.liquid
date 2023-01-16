@@ -1,4 +1,3 @@
-
 <section class="2022_new_collection sec"
   data-aos="zoom-out"
   data-aos-duration="3000">
@@ -10,22 +9,48 @@
       {% for product in collection.products %}
         <!-- within | collection を追加することで、コレクション内の製品のプロダクトを出力してくれる -->
       <a href=" {{ product.url | within: collection }} " class="product_card">
-        <!-- <div class="reveal">〜 < class="hidden">まで、画像をホバーしたら商品変更になる -->
-        <div class="reveal">
+        <div class="product__image">
           <img
-            src="{{ product.featured_image.src | img_url: 'large' }}"
-            alt="{{ product.featured_image.alt | escape }}"
-          >
-          <img
-            class="hidden"
-            src="{{ product.images.last | img_url: 'large' }}"
+            src="{{ product.images.last | img_url: '450x450' }}"
             alt="{{ product.images.last.alt | escape }}"
           >
+          <img
+            src="{{ product.featured_image.src | img_url: '450x450' }}"
+            alt="{{ featured.featured_image.alt | escape }}"
+          >
+        </div>
+        <div class="product__disc">
+          <h3>{{ product.title }}</h3>
+          <span class="price price__box">
+            {% if product.compare_at_price > product.price and product.available %}
+              <span class="price__original">{{ product.price | money }}</span>
+              <span class="prie__compare"> {{ product.compare_at_price | money }} </span>
+            {% else %}
+              <span class="price__original">{{ product.price | money }}</span>
+            {% endif %}
+
+            <!-- *** 割引 *** -->
+            <!-- 割引金額 -->
+            {% assign discount = product.compare_at_price | minus: product.price %}
+            <!-- 割引率(（元の金額 ー セール価格）÷ 元の金額 x １００) -->
+            {% assign discountrate = discount | times: 100.0 | divided_by: product.compare_at_price %}
+            {% assign show_discount = section.settings.show_discount %}
+
+            {% if product.compare_at_price > product.price and product.available %}
+              <p class="discountrate">
+                {% if show_discount == 'yen' %}
+                  <span class="dicountrate__customize">{{ discount | money }} OFF</span>
+                {% elsif show_discount == 'percent' %}
+                  <span class="dicountrate__customize">{{ discountrate | round }}%OFF</span>
+                {% endif %}
+              </p>
+            {%- endif -%}
+          </span>
         </div>
         {% comment %} <img src=" {{ product.featured_image.src | img_url: 'large' }} " alt=""> {% endcomment %}
-        <h3> {{ product.title }} </h3>
+        {% comment %} <h3> {{ product.title }} </h3>
         <p class="price"> {{ product.price | money }} </p>
-        <p class="Btn bgleft"><span>詳細を見る</span></p>
+        <p class="Btn bgleft"><span>詳細を見る</span></p> {% endcomment %}
       </a>
       {% else %}
       <p>お探しの商品が見つかりませんでした。</p>
@@ -49,21 +74,59 @@
 
 <style>
   .paginte_nav{
-  display: flex;
-  justify-content: center;
-  }
-
-  .paginte_nav span{
-    padding: 10px;
-    margin: 7px;
-    font-size: 25px;
-    border: #E0E0E0 2px solid;
-  }
-
-  @media (max-width: 500px) {
-    .paginte_nav span{
-      font-size: 15px;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    opacity: 1;
     }
-  }
-</style>
+  
+    .paginte_nav span{
+      padding: 10px;
+      margin: 7px;
+      font-size: 20px;
+      border: #E0E0E0 2px solid;
+    }
+  
+    .paginte_nav span:hover{
+    opacity: 0.5;
+    background-color: beige;
+    }
+  
+    @media (max-width: 500px) {
+      .paginte_nav span{
+        font-size: 15px;
+      }
+    }
+  
+    .prie__compare{
+      text-decoration: line-through;
+      color: #CCCCCC;
+    }
+  
+     .dicountrate__customize {
+      color: {{ section.settings.color_discount }};
+      background-color: {{ section.settings.color_discountnk }};
+      font-size: 1.0vw;
+      border-radius: 50px;
+      padding: 5px;
+    }
+  
+    .product_flex{
+      display: flex!important;
+      flex-direction: column!important;
+    }
+  
+    .product__disc{
+      flex-grow: 1;
+      margin-bottom: 40px;
+    }
+  
+    .product__image img{
+     height: 100%;
+    }
 
+    nav span{
+      line-height: normal!important;
+    }
+
+</style>

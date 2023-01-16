@@ -26,7 +26,6 @@
             </div>
             {% comment %} <img src="{{ product.featured_image.src | img_url: '3000x' }}" alt=""> {% endcomment %}
             <div class="product__disc">
-              {% comment %} <div class="poduct__disc-box"> {% endcomment %}
                 <h3>{{ product.title }}</h3>
                 <span class="price price__box">
                   {% if product.compare_at_price > product.price and product.available %}
@@ -53,7 +52,6 @@
                     </p>
                   {%- endif -%}
                 </span>
-              {% comment %} </div> {% endcomment %}
             </div>
             <p class="Btn bgleft"><span>詳細を見る</span></p>
         </a>

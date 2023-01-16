@@ -820,7 +820,7 @@ header {
 }
 
 .sec {
-  margin-top: 70px;
+  margin-top: 10vw;
   margin-bottom: 70px;
   border-bottom: 2px solid #d9d6d6;
   padding-bottom: 53px;
@@ -828,7 +828,7 @@ header {
 
 .sec h2 {
   text-align: center;
-  font-size: 1.5vw;
+  font-size: 2.5vw;
   margin-bottom: 3vw;
 }
 
@@ -879,6 +879,7 @@ header {
 
 .sec .collection-wrap .product_card img {
   width: 100%;
+  height: 100%;
 }
 
 .sec .collection-wrap .product_card h3 {
@@ -915,7 +916,7 @@ header {
 
 @media (max-width: 500px) {
   .sec {
-    margin-top: 40px;
+    margin-top: 25vw;
     margin-bottom: 40px;
   }
 
