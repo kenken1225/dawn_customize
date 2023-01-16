@@ -189,7 +189,7 @@ header {
   left: 0;
   top: 0;
   width: 100%;
-  height: 60px;
+  height: 70px;
 }
 
 @media (min-width: 1330px) {
@@ -867,9 +867,9 @@ header {
   transition: all .3s;
 }
 
-.sec .collection-wrap .product_card:nth-of-type(n+4) {
+/* .sec .collection-wrap .product_card:nth-of-type(n+4) {
   margin-bottom: 70px;
-}
+} */
 
 @media (max-width: 500px) {
   .sec .collection-wrap .product_card:nth-of-type(n+4) {
@@ -2268,6 +2268,40 @@ footer .footer__inner {
 // Reveal module(商品ホバーCSS )
 // =============================================== */
 
+.product__image {
+  position: relative;
+  width: 270px;
+  height: 250px;
+  margin: 0 auto;
+  display: block;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.product__image img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 100%;
+  display: block;
+  -webkit-transition: .4s ease-in-out;
+  transition: .4s ease-in-out;
+}
+
+.product__image:hover img:nth-of-type(2) {
+  opacity: 0;
+}
+
+@media screen and (max-width: 480px) {
+  .product__image {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+/*
 .reveal .hidden {
   display: block;
   visibility: visible !important;
@@ -2281,7 +2315,6 @@ footer .footer__inner {
   position: relative;
   width: 100%;
 }
-
 
 .reveal .hidden {
   position: absolute;
@@ -2308,7 +2341,6 @@ footer .footer__inner {
   width: 100%;
   height: 100%;
   background-color: white;
-  /* fallback for IE8 */
   background-color: rgba(255, 255, 255, 0.7);
   font: 13px/1.6 sans-serif;
   text-transform: uppercase;
@@ -2331,12 +2363,9 @@ footer .footer__inner {
 
 
 @media screen and (max-width: 480px) {
-
-  .
-
-  /* 480px以下に適用されるCSS（スマホ用） */
   .reveal>img {
     width: 100% !important;
     height: 100% !important;
   }
 }
+*/

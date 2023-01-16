@@ -7,60 +7,59 @@
   <div class="collection-wrap flex">
     <!-- コレクションの中の商品を取ってくるために、変数を作る -->
     {% assign collection = collections[section.settings.toppage_collection] %}
+    {% assign discount = product_card_product.compare_at_price | minus: product_card_product.price %}
+    <!-- （元の金額 ー セール価格）÷ 元の金額 x １００ -->
+    {% assign discountrate = discount | times: 100.0 | divided_by: product_card_product.compare_at_price %}
     <!-- paginateは、for文の表示個数を制限してくれる（ここでは３つの商品） -->
     {% paginate collection.products by 4 %}
       {% for product in collection.products %}
-        <a href="{{ product.url }}" class="product_card">
-          <!--
-           <div class="reveal">〜 < class="hidden">まで、画像をホバーしたら商品変更になる
-          -->
-          <div class="reveal">
-            <img
-              src="{{ product.featured_image.src | img_url: '450x450' }}"
-              alt="{{ featured.featured_image.alt | escape }}"
-            >
-            <img
-              class="hidden"
-              src="{{ product.images.last | img_url: '450x450' }}"
-              alt="{{ product.images.last.alt | escape }}"
-            >
-          </div>
-          {% comment %} <img src="{{ product.featured_image.src | img_url: '3000x' }}" alt=""> {% endcomment %}
-          <h3>{{ product.title }}</h3>
-          <p class="price">{{ product.price | money }}</p>
-          <p class="Btn bgleft"><span>詳細を見る</span></p>
+        <a href="{{ product.url }}" class="product_card product_flex">
+            <div class="product__image">
+              <img
+                src="{{ product.images.last | img_url: '450x450' }}"
+                alt="{{ product.images.last.alt | escape }}"
+              >
+              <img
+                src="{{ product.featured_image.src | img_url: '450x450' }}"
+                alt="{{ featured.featured_image.alt | escape }}"
+              >
+            </div>
+            {% comment %} <img src="{{ product.featured_image.src | img_url: '3000x' }}" alt=""> {% endcomment %}
+            <div class="product__disc">
+              {% comment %} <div class="poduct__disc-box"> {% endcomment %}
+                <h3>{{ product.title }}</h3>
+                <span class="price price__box">
+                  {% if product.compare_at_price > product.price and product.available %}
+                    <span class="price__original">{{ product.price | money }}</span>
+                    <span class="prie__compare"> {{ product.compare_at_price | money }} </span>
+                  {% else %}
+                    <span class="price__original">{{ product.price | money }}</span>
+                  {% endif %}
+
+                  <!-- *** 割引 *** -->
+                  <!-- 割引金額 -->
+                  {% assign discount = product.compare_at_price | minus: product.price %}
+                  <!-- 割引率(（元の金額 ー セール価格）÷ 元の金額 x １００) -->
+                  {% assign discountrate = discount | times: 100.0 | divided_by: product.compare_at_price %}
+                  {% assign show_discount = section.settings.show_discount %}
+
+                  {% if product.compare_at_price > product.price and product.available %}
+                    <p class="discountrate">
+                      {% if show_discount == 'yen' %}
+                        <span class="dicountrate__customize">{{ discount | money }} OFF</span>
+                      {% elsif show_discount == 'percent' %}
+                        <span class="dicountrate__customize">{{ discountrate | round }}%OFF</span>
+                      {% endif %}
+                    </p>
+                  {%- endif -%}
+                </span>
+              {% comment %} </div> {% endcomment %}
+            </div>
+            <p class="Btn bgleft"><span>詳細を見る</span></p>
         </a>
       {% endfor %}
     {% endpaginate %}
-
-    {% comment %}
-       <a href="#" class="product_card">
-        <img src="img/new/product-2.webp" alt="">
-        <h3>商品3</h3>
-        <p class="price">¥2,592</p>
-        <p class="Btn bgleft"><span>詳細を見る</span></p>
-      </a>
-      <a href="#" class="product_card">
-        <img src="img/new/product-2.webp" alt="">
-        <h3>商品3</h3>
-        <p class="price">¥2,592</p>
-        <p class="Btn bgleft"><span>詳細を見る</span></p>
-      </a>
-      <a href="#" class="product_card">
-        <img src="img/new/product-2.webp" alt="">
-        <h3>商品3</h3>
-        <p class="price">¥2,592</p>
-        <p class="Btn bgleft"><span>詳細を見る</span></p>
-      </a>
-      <a href="#" class="product_card">
-        <img src="img/new/product-2.webp" alt="">
-        <h3>商品3</h3>
-        <p class="price">¥2,592</p>
-        <p class="Btn bgleft"><span>詳細を見る</span></p>
-      </a>
-    {% endcomment %}
   </div>
-
   <a href=" {{ collection.url }} " class="Btn02 bgleft02"><span>もっと見る</span></a>
 </section>
 
@@ -80,6 +79,30 @@
           padding: 20px;
       }
   }
+
+  .prie__compare{
+    text-decoration: line-through;
+    color: #CCCCCC;
+  }
+
+  .dicountrate__customize {
+    color: {{ section.settings.color_discount }};
+    background-color: {{ section.settings.color_discountnk }};
+    font-size: 1.0vw;
+    border-radius: 50px;
+    padding: 5px;
+  }
+
+  .product_flex{
+    display: flex!important;
+    flex-direction: column!important;
+  }
+
+  .product__disc{
+    flex-grow: 1;
+    margin-bottom: 40px;
+  }
+
 </style>
 
 {% schema %}
@@ -112,6 +135,38 @@
       "type": "collection",
       "id": "toppage_collection",
       "label": "トップページコレクション"
+    },
+    {
+      "type": "select",
+      "id": "show_discount",
+      "options": [
+        {
+          "value": "yen",
+          "label": "通貨(〇〇 OFF)"
+        },
+        {
+          "value": "percent",
+          "label": "パーセント（●％ OFF）"
+        },
+        {
+          "value": "none",
+          "label": "非表示"
+        }
+      ],
+      "default": "yen",
+      "label": "ディスカウント"
+    },
+    {
+      "type": "color",
+      "id": "color_discountnk",
+      "label": "ディスカウントバッジ背景カラー",
+      "default": "#ddbe87"
+    },
+    {
+      "type": "color",
+      "id": "color_discount",
+      "label": "ディスカウントバッジ文字カラー",
+      "default": "#000"
     }
   ]
 }
