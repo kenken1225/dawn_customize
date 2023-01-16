@@ -1,27 +1,25 @@
-
-<section class="sec04 sec" data-aos="fade-up"
-  data-aos-duration="2000">
-    <div class="items-wrapper flex">
-        {% for block in section.blocks %}
-            {% assign collection = block.settings.toppage_collection %}
-            <a href="{{ collection.url }}" class="item" style="background-image: url( {{ collection.image | image_url }} );" >
-                <div class="item__content">
-                    <h3 class="item__content-text" > {{ block.settings.toppage_text }} </h3>
-                    <div class="Btn-top bgleft bgleft03 collection-btn "  style=" border:2px solid #fff; ">
-                        <span  class="collection__btn" style=" font-weight:bold; color:white; " >もっと見る</span>
-                    </div>
-                </div>
-            </a>
-        {% endfor %}
-      {% comment %} <a href="product.html" class="item">
+<section
+  class="sec04 sec"
+  data-aos="fade-up"
+  data-aos-duration="2000"
+>
+  <div class="items-wrapper flex">
+    {% for block in section.blocks %}
+      {% assign collection = block.settings.toppage_collection %}
+      <a
+        href="{{ collection.url }}"
+        class="item pointer__none"
+        style="background-image: url( {{ collection.image | image_url }} );"
+      >
         <div class="item__content">
-          <h3>NEW COLLECTION</h3>
-          <div class="Btn bgleft bgleft03">
-            <span>もっと見る</span>
+          <h3 class="item__content-text">{{ block.settings.toppage_text }}</h3>
+          <div class="Btn-top bgleft bgleft03 collection-btn " style=" border:2px solid #fff; ">
+            <span class="collection__btn" style=" font-weight:bold; color:white; ">もっと見る</span>
           </div>
         </div>
       </a>
-
+    {% endfor %}
+    {% comment %}
       <a href="product.html" class="item">
         <div class="item__content">
           <h3>NEW COLLECTION</h3>
@@ -56,72 +54,82 @@
             <span>もっと見る</span>
           </div>
         </div>
-      </a> {% endcomment %}
+      </a>
 
-    </div>
-  </section>
+      <a href="product.html" class="item">
+        <div class="item__content">
+          <h3>NEW COLLECTION</h3>
+          <div class="Btn bgleft bgleft03">
+            <span>もっと見る</span>
+          </div>
+        </div>
+      </a>
+    {% endcomment %}
+  </div>
+</section>
 
-  {% assign count = count | plus:1 %}
+{% assign count = count | plus: 1 %}
 
-  <style>
-
-    .item__content{
-        {% if block.settings.bold-text %}
-            font-weight : bold;
-        {% endif %}
-        font-size: {{ block.settings.font-size }}px;
-        color: {{ block.settings.font-color }};
-      }
-
-    .item__content-text{
-        font-weight: bold;
-        color: white;
-        font-size: 30px;
-        margin-bottom: 10px;
+<style>
+  .item__content{
+      {% if block.settings.bold-text %}
+          font-weight : bold;
+      {% endif %}
+      font-size: {{ block.settings.font-size }}px;
+      color: {{ block.settings.font-color }};
     }
 
-      .Btn-top {
-        border: rgba(147, 147, 147, 0.3) solid 1px;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        display: block;
-        text-align: center;
-        font-size: 1.2vw;
-        width: 100%;
-        padding: 15px 20px;
-        margin: 0 auto;
-        position: relative;
-        overflow: hidden;
-        -webkit-transition: ease .2s;
-        transition: ease .2s;
+  .item__content-text{
+      font-weight: bold;
+      color: white;
+      font-size: 30px;
+      margin-bottom: 10px;
+  }
+
+    .Btn-top {
+      border: rgba(147, 147, 147, 0.3) solid 1px;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      display: block;
+      text-align: center;
+      font-size: 1.2vw;
+      width: 100%;
+      padding: 15px 20px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      -webkit-transition: ease .2s;
+      transition: ease .2s;
+    }
+
+    .Btn-top span {
+      position: relative;
+      z-index: 3;
+      /*z-indexの数値をあげて文字を背景よりも手前に表示*/
+      color: #939393;
+      -webkit-transition: ease .4s;
+      transition: ease .4s;
+    }
+
+    .Btn-top:hover span {
+      color: #000;
+    }
+
+    @media screen and (max-width: 480px) {
+        .collection__btn{
+          font-size: 15px;
       }
-
-      .Btn-top span {
-        position: relative;
-        z-index: 3;
-        /*z-indexの数値をあげて文字を背景よりも手前に表示*/
-        color: #939393;
-        -webkit-transition: ease .4s;
-        transition: ease .4s;
+      .item__content-text{
+      font-size:
       }
+    }
 
-      .Btn-top:hover span {
-        color: #000;
-      }
+    .pointer__none{
+      user-select: none;
+    }
+</style>
 
-      @media screen and (max-width: 480px) {
-          .collection__btn{
-            font-size: 15px;
-        }
-        .item__content-text{
-        font-size: 
-        }
-      }
-
-  </style>
-
-
-  {% schema %}
+{% schema %}
 {
   "name": "コレクションリスト",
   "tag": "section",
@@ -138,33 +146,33 @@
           "label": "コレクションリスト"
         },
         {
-            "type" : "text",
-            "id" : "toppage_text",
-            "default": "NEW COLLECTIOM",
-            "label" : "テキスト"
-          },
-          {
-            "type": "checkbox",
-            "id": "bold-text",
-            "default": false,
-            "label": "太文字"
-          },
-          {
-            "type": "range",
-            "id": "font-size",
-            "default": 14,
-            "label": "文字の大きさ",
-            "min": 12,
-            "max": 20,
-            "step": 1,
-            "unit": "px"
-          },
-          {
-            "type": "color",
-            "id": "font-color",
-            "label": "文字色",
-            "default": "#000000"
-          }
+          "type": "text",
+          "id": "toppage_text",
+          "default": "NEW COLLECTIOM",
+          "label": "テキスト"
+        },
+        {
+          "type": "checkbox",
+          "id": "bold-text",
+          "default": false,
+          "label": "太文字"
+        },
+        {
+          "type": "range",
+          "id": "font-size",
+          "default": 14,
+          "label": "文字の大きさ",
+          "min": 12,
+          "max": 20,
+          "step": 1,
+          "unit": "px"
+        },
+        {
+          "type": "color",
+          "id": "font-color",
+          "label": "文字色",
+          "default": "#000000"
+        }
       ]
     }
   ]

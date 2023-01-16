@@ -916,8 +916,8 @@ header {
 
 @media (max-width: 500px) {
   .sec {
-    margin-top: 25vw;
-    margin-bottom: 40px;
+    margin-top: 10vw;
+    margin-bottom: 30px;
   }
 
   .sec .collection-wrap {
