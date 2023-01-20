@@ -14,7 +14,6 @@
     <!-- AOS（アニメーション） -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
     {%- endif -%}
@@ -227,7 +226,7 @@
     {% endstyle %}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
-    <!--  CSSカスタマイズ -->
+    <!-- CSSカスタマイズ -->
     {{ 'reset.css' | asset_url | stylesheet_tag }}
     {{ 'style.css' | asset_url | stylesheet_tag }}
     <!-- AOS（アニメーション） -->
@@ -241,27 +240,27 @@
     {%- endunless -%}
 
     {%- if settings.predictive_search_enabled -%}
-      <link rel="stylesheet" href="{{ 'component-predictive-search.css' | asset_url }}" media="print" onload="this.media='all'">
+      <link
+        rel="stylesheet"
+        href="{{ 'component-predictive-search.css' | asset_url }}"
+        media="print"
+        onload="this.media='all'"
+      >
     {%- endif -%}
 
-    <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
-    if (Shopify.designMode) {
-      document.documentElement.classList.add('shopify-design-mode');
-    }
+    <script>
+      document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+      if (Shopify.designMode) {
+        document.documentElement.classList.add('shopify-design-mode');
+      }
     </script>
   </head>
 
-  <!--
-
-
-    以下、修正！
-
-
-  -->
+  <!-- 以下、修正！ -->
 
   <body class="gradient">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
-      {{ "accessibility.skip_to_text" | t }}
+      {{ 'accessibility.skip_to_text' | t }}
     </a>
 
     {%- if settings.cart_type == 'drawer' -%}
@@ -269,7 +268,7 @@
     {%- endif -%}
 
     {% section 'custom-announcement-bar' %}
-   {% section 'custom-header' %}
+    {% section 'custom-header' %}
     {% comment %} {% section 'announcement-bar' %} {% endcomment %}
     {% comment %} {% section 'header' %} {% endcomment %}
 
@@ -292,27 +291,27 @@
         cart_change_url: '{{ routes.cart_change_url }}',
         cart_update_url: '{{ routes.cart_update_url }}',
         cart_url: '{{ routes.cart_url }}',
-        predictive_search_url: '{{ routes.predictive_search_url }}'
+        predictive_search_url: '{{ routes.predictive_search_url }}',
       };
 
       window.cartStrings = {
         error: `{{ 'sections.cart.cart_error' | t }}`,
-        quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t: quantity: '[quantity]' }}`
-      }
+        quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t: quantity: '[quantity]' }}`,
+      };
 
       window.variantStrings = {
         addToCart: `{{ 'products.product.add_to_cart' | t }}`,
         soldOut: `{{ 'products.product.sold_out' | t }}`,
         unavailable: `{{ 'products.product.unavailable' | t }}`,
         unavailable_with_option: `{{ 'products.product.value_unavailable' | t: option_value: '[value]' }}`,
-      }
+      };
 
       window.accessibilityStrings = {
         imageAvailable: `{{ 'products.product.media.image_available' | t: index: '[index]' }}`,
         shareSuccess: `{{ 'general.share.success_message' | t }}`,
         pauseSlideshow: `{{ 'sections.slideshow.pause_slideshow' | t }}`,
         playSlideshow: `{{ 'sections.slideshow.play_slideshow' | t }}`,
-      }
+      };
     </script>
 
     {%- if settings.predictive_search_enabled -%}
@@ -324,17 +323,17 @@
       AOS.init();
     </script>
 
-    <!--  jsカスタマイズ -->
+    <!-- jsカスタマイズ -->
     <script src="https://kit.fontawesome.com/14c63bdccc.js" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     {{ 'script.js' | asset_url | script_tag }}
 
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-
-
-
-
   </body>
 </html>

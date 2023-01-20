@@ -9,7 +9,7 @@
     <nav class="nav">
       <ul class="nav_list">
         {% for link in linklists['main-menu'].links %}
-          <!-- linklist.〜　で、〇〇の配列を呼び出す。今回は、メインメニューの中の配列（モノ）を呼び出す -->
+          <!-- linklist.〜 で、〇〇の配列を呼び出す。今回は、メインメニューの中の配列（モノ）を呼び出す -->
           {% assign child_list_handle = link.title | handleize %}
           <!-- 各小要素（サブメニュー）を呼び出すために変数をつくる -->
           {% if linklists[child_list_handle].links != blank %}
@@ -82,7 +82,8 @@
       </nav>
     {% endcomment %}
   </div>
-  <div class="hamburger" id="js-hamburger">
+
+  <div class="hamburger " id="js-hamburger">
     <span class="hamburger_border hamburger_border_top"></span>
     <span class="hamburger_border hamburger_border_center"></span>
     <span class="hamburger_border hamburger_border_bottom"></span>
@@ -170,6 +171,7 @@
       width: 90px;
     }
   }
+
 </style>
 
 {% schema %}
